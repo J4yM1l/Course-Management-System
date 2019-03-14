@@ -55,8 +55,8 @@ public class Connect
         rs=stmt.executeQuery(sql);  
         StringBuilder data=new StringBuilder();
         // Iterate through the data in the result set and display it.
-        data.append("ID  NAME    RATING  AGE");
-        data.append("=======================");
+        data.append("ID  NAME    RATING  AGE\n");
+        data.append("=======================\n");
          while (rs.next()) {
             data.append(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getInt(3)+" "+rs.getDouble("age")+"\n");
          }
