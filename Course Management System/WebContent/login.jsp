@@ -24,8 +24,9 @@
 	<form action="<%= request.getContextPath()%>/PageNavigator" method="get">
 		Username: <input type="text" name="username" placeholder="Enter Username"></br>
 		Password: <input type="password" name="password" placeholder="Enter Password"></br>
+		You don't have an account? <a href="account_registration.jsp">Register</a></br>
 		<input type="submit" value="Login" style="margin-right: auto;" > </br>
-		You don't have an account? <a href="#">Register</a>
+		
 	</form>	
   </div>
   <!-- Footer -->

@@ -8,11 +8,23 @@
   
     <!-- Page Content -->
   <div class="container">
-  <!-- form -->
-	<form action="<%= request.getContextPath()%>/PageNavigator" method="get">
-		<input type="hidden" name="output" value="connect">
-		<input type="submit" value="Test Database Connection">
-	</form>	
+  	<div>
+  		<div >
+  			<table>
+  				<tr>
+  					<th><label>Course Name</label></th>
+  					<th><label style="margin-left: 210px;">Grade</label></th>
+  				</tr>
+  			</table>
+  			<table >
+  				<tr>
+  				  	<th><label>CSC 1310 Computer Program. I</label></th>
+  					<th><label style="margin-left: 100px;">A</label></th>
+  				</tr>
+
+  			</table>
+  		</div>
+  	</div>
   </div>
   
   <!-- footer -->

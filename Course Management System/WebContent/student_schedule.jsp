@@ -9,10 +9,92 @@
     <!-- Page Content -->
   <div class="container">
   <!-- form -->
-	<form action="<%= request.getContextPath()%>/PageNavigator" method="get">
-		<input type="hidden" name="output" value="connect">
-		<input type="submit" value="Test Database Connection">
-	</form>	
+	<div class="row">
+		<div class="col-md-6">
+			<div style="border-right: 5px solid; border-left: 5px solid;border-right-width: thin; border-left-width: thin;">
+				<div style="margin-left: 10px; margin-right:10px;">
+				<h5 ><b>CSC 1310 Computer Program. I</b></h5>
+				<table style="width:100%;">
+				<tr>
+					<th>
+						Assigned Instructor:
+					</th>
+					<th>
+						Mustafa Atay
+					</th>
+				</tr>
+				<tr>
+					<th>
+						Grade Mode:
+					</th>
+					<th>
+						Standard A, B, C, D, F, I
+					</th>
+				</tr>
+				<tr>
+					<th>
+						Time:
+					</th>
+					<th>
+						9:30 am - 10:45 
+					</th>
+				</tr>
+				<tr>
+					<th>
+						Day:
+					</th>
+					<th>
+						Monday; Wednesday
+					</th>
+				</tr>
+				</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Second course -->
+		<div class="col-md-6">
+			<div style="border-right: 5px solid; border-left: 5px solid;border-right-width: thin; border-left-width: thin;">
+				<div style="margin-left: 10px; margin-right:10px;">
+				<h5 ><b>CSC 1310 Computer Program. I</b></h5>
+				<table style="width:100%;">
+				<tr>
+					<th>
+						Assigned Instructor:
+					</th>
+					<th>
+						Mustafa Atay
+					</th>
+				</tr>
+				<tr>
+					<th>
+						Grade Mode:
+					</th>
+					<th>
+						Standard A, B, C, D, F, I
+					</th>
+				</tr>
+				<tr>
+					<th>
+						Time:
+					</th>
+					<th>
+						9:30 am - 10:45 
+					</th>
+				</tr>
+				<tr>
+					<th>
+						Day:
+					</th>
+					<th>
+						Monday; Wednesday
+					</th>
+				</tr>
+				</table>
+				</div>
+			</div>
+		</div>
+	</div>
   </div>
   
   <!-- footer -->

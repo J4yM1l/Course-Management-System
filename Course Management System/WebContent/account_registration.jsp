@@ -160,6 +160,7 @@
 						</br>	
 		Username: <input type="text" name="s_username" placeholder="Enter Username"> </br>
 		Password: <input type="password" name="s_password" placeholder="Enter Password"> </br>
+			Have an account? <a href="login.jsp">Login</a></br>
 		<input type="submit" value="Submit">
 	</form>	
   </div>
@@ -298,6 +299,7 @@
 						</br>	
 		Username: <input type="text" name="f_username" placeholder="Enter Username"> </br>
 		Password: <input type="password" name="f_password" placeholder="Enter Password"> </br>
+		Have an account? <a href="login.jsp">Login</a></br>
 		<input type="submit" value="Submit">
 	</form>	
   </div>
