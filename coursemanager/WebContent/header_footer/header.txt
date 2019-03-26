@@ -13,6 +13,7 @@
 
   <!-- Custom styles for this template -->
   <link href="f_sources/css/business-frontpage.css" rel="stylesheet">
+  
 </head>
 
 <body style="background-color: #5e5e5e">
