@@ -39,7 +39,7 @@
 <body style="background-color: #5e5e5e">
     <!-- Page Content -->
     
- <div class="card text-center">
+ <div class="card text-center w-50 p-3 mw-50">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
@@ -63,22 +63,6 @@
 			<input class ="pager" type="submit" value="Login" style="margin-right: auto;" > </br>
 			
 		</form>	
-		
-		<form>
-  <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-    <input id="email" type="text" class="form-control" name="email" placeholder="Email">
-  </div>
-  <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
-  </div>
-  <div class="input-group">
-    <span class="input-group-addon">Text</span>
-    <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
-  </div>
-</form>
-		
 	  </div>
 	 </div>
 	<div id="faculty" style="display: none">
