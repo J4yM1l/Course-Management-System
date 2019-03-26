@@ -39,7 +39,7 @@
 <body style="background-color: #5e5e5e">
     <!-- Page Content -->
     
- <div class="card text-center w-50 p-3 mw-50">
+ <div class="card text-center w-50 p-3 row align-items-center" style="height: 400px; background-color:#f6f5f5 ;margin: auto; outline: #c7004c solid 10px">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
@@ -52,35 +52,77 @@
   </div>
   <div id="student">
   <div class="card-body">
-    <h3 class="card-title">Student Login</h3>
+    <h3 class="card-title font-weight-bold" style="color: #c7004c">Student Login</h3>
     </div>
 	  <div class="container" id="student">
 	  <!-- form -->
 		<form action="<%= request.getContextPath()%>/SiteNavigator?action=studentlogin" method="post">
-			Username: <input type="text" name="username" placeholder="Enter Username"></br>
-			Password: <input type="password" name="password" placeholder="Enter Password"></br>
-			You don't have an account? <a href="<%=request.getContextPath()%>/SiteNavigator?action=register">Register</a></br>
-			<input class ="pager" type="submit" value="Login" style="margin-right: auto;" > </br>
 			
+			<div class="input-group input-group-sm mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-sm"><span class="glyphicon glyphicon-user"></span>Username</span>
+			  </div>
+			  <input type="text" name="username" placeholder="Student ID" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+			</div>
+			
+			<div class="input-group input-group-sm mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-sm"><span class="glyphicon glyphicon-user"></span>Password</span>
+			  </div>
+			  <input type="password" name="password" placeholder="Enter Password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+			</div>
+			
+			<div class="input-group input-group-sm mb-3">
+			  <div class="input-group-prepend">
+			    <label class="font-weight-lighter font-italic ">You don't have an account? <a href="<%=request.getContextPath()%>/SiteNavigator?action=register">Register</a></label>
+			  </div>
+			</div>
+			
+			<div class="input-group input-group-sm mb-3">
+			  <input  type="submit" value="Login" style="margin-right: auto;"  class="form-control btn btn-primary" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+			</div>
 		</form>	
+		
+		
 	  </div>
 	 </div>
-	<div id="faculty" style="display: none">
+	<div id="faculty" style="display: none; ">
 	<div class="card-body">
-    <h3 class="card-title">Faculty Login</h3>
+    <h3 class="card-title font-weight-bold" style="color: #c7004c">Faculty/Staff Login</h3>
     </div>
 	<div class="container" >
   		<!-- form -->
 	<form action="<%= request.getContextPath()%>/SiteNavigator?action=facultylogin" method="post">
-		Username: <input type="text" name="username" placeholder="Enter Username"></br>
-		Password: <input type="password" name="password" placeholder="Enter Password"></br>
-		You don't have an account? <a href="<%=request.getContextPath()%>/SiteNavigator?action=register">Register</a></br>
-		<input type="submit" value="Login" style="margin-right: auto;" > </br>
+		<div class="input-group input-group-sm mb-3">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="inputGroup-sizing-sm"><span class="glyphicon glyphicon-user"></span>Username</span>
+		  </div>
+		  <input type="text" name="username" placeholder="Faculty/Staff ID" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+		</div>
 		
+		<div class="input-group input-group-sm mb-3">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="inputGroup-sizing-sm"><span class="glyphicon glyphicon-user"></span>Password</span>
+		  </div>
+		  <input type="password" name="password" placeholder="Enter Password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+		</div>
+		
+		<div class="input-group input-group-sm mb-3">
+		  <div class="input-group-prepend">
+		    <label class="font-weight-lighter font-italic ">You don't have an account? <a href="<%=request.getContextPath()%>/SiteNavigator?action=register">Register</a></label>
+		  </div>
+		</div>
+		
+		<div class="input-group input-group-sm mb-3">
+		  <input  type="submit" value="Login" style="margin-right: auto;"  class="form-control btn btn-primary" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+		</div>
 	</form>	
   </div>
   </div>
 </div>
+
+
+
   <!-- Footer -->
   <footer class="py-5">
     <div class="container">

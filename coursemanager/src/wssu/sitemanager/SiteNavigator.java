@@ -80,12 +80,17 @@ public class SiteNavigator extends HttpServlet {
 		String fname=request.getParameter("f_firstname");
 		String mname=request.getParameter("f_middlename");
 		String lname=request.getParameter("f_lastname");
-		String department=request.getParameter("f_field");
+		String department=request.getParameter("f_department");
 //		String major=request.getParameter("concentration");
 //		String level=request.getParameter("classification");
 //		int byear=Integer.parseInt(request.getParameter("s_bd_day"));
 		String username=request.getParameter("f_username");
 		String password=request.getParameter("f_password");
+		String password2=request.getParameter("f_password2");
+		if(!password.equals(password2)) {
+			response.sendRedirect(request.getContextPath()+"/SiteNavigator?action=register");
+			return;
+		}
 		Connect connection=new Connect();
 		connection.InsertToFaculty(fname, mname, lname, department, username, password);
 		System.out.println("Inserted 1 record into Faculty tables");
@@ -101,7 +106,12 @@ public class SiteNavigator extends HttpServlet {
 			String level=request.getParameter("s_class");
 			int byear=Integer.parseInt(request.getParameter("s_bd_day"));
 			String username=request.getParameter("s_username");
+			String password2=request.getParameter("s_password2");
 			String password=request.getParameter("s_password");
+			if(!password.equals(password2)) {
+				response.sendRedirect(request.getContextPath()+"/SiteNavigator?action=register");
+				return;
+			}
 			Connect connection=new Connect();
 			connection.InsertToStudent(fname, mname, lname, major, level, byear, username, password);
 			System.out.println("Inserted 1 row into Student tables");
