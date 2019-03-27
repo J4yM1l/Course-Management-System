@@ -5,11 +5,37 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>CS Course Management System</title>
+  <link href="f_sources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="f_sources/css/business-frontpage.css" rel="stylesheet">
 </head>
-<body>
-	<div>
-		<a href="<%=request.getContextPath()%>/SiteNavigator?action=studentlogin">Student Login</a>
-		<a href="<%=request.getContextPath()%>/SiteNavigator?action=facultylogin">Faculty Login</a>
+<body  style="background-color: #5e5e5e">
+
+<h1 class="card-title font-weight-bold card-text" style="text-align: center; color: #c7004c">WINSTON-SALEM STATE UNIVERSITY</h1>
+
+<div style="margin-top: 100px;">
+	<div class="row" style="margin: auto; width:60%">
+	  <div class="col-*-* " style=" margin: auto;">
+	  	<a href="<%=request.getContextPath()%>/SiteNavigator?action=studentlogin">
+			<div class="card" style="width: 18rem;">
+			  <img src="f_sources/images/student.png" class="img-circle" alt="Student Login">
+			  <div class="card-body">
+			    <h3 class="card-title font-weight-bold card-text" style="text-align: center"o">STUDENT LOGIN</h3>
+			  </div>
+			</div>
+			</a>
+	  </div>
+	  
+	 <div class="col-*-*" style="margin: auto;">
+	  	<a href="<%=request.getContextPath()%>/SiteNavigator?action=facultylogin">
+			<div class="card" style="width: 18rem; ">
+			  <img src="f_sources/images/faculty.png" class="img-circle" alt="Faculty Login" style="height: 16rem">
+			  <div class="card-body">
+			   <h3 class="card-title font-weight-bold card-text" style="text-align: center">FACULTY LOGIN</h3>
+			  </div>
+			</div>
+			</a>
+	  </div>
 	</div>
+</div>
 </body>
 </html>

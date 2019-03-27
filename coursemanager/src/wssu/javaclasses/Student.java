@@ -35,7 +35,6 @@ public class Student {
 			tpassword=rs.getString("password");
 		}
 		if(tusername==null || tpassword==null)return false;
-		System.out.println(tusername+" "+tpassword +"  "+rs.next());
         if(tusername.equals(username) && tpassword.equals(password)) {
         	return true;}
 	   return false;

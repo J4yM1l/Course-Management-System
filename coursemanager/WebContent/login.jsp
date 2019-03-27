@@ -15,28 +15,18 @@
 
   <!-- Custom styles for this template -->
   <link href="f_sources/css/business-frontpage.css" rel="stylesheet">
-  <script>
-  	function disableDiv(type){
-  		var s_active=document.getElementById("s_active");
-  		var f_active=document.getElementById("f_active");
-  		var student=document.getElementById("student");
-  		var faculty=document.getElementById("faculty");
-  		if(type==0){
-  			student.style.display="block";
-  			faculty.style.display = "none";
-  			s_active.classList.add("active");
-  			f_active.classList.remove("active")
-  		}else{
-  			student.style.display="none";
-			faculty.style.display = "block";
-  			f_active.classList.add("active")
-  			s_active.classList.remove("active")
-			}
-  	}
-  </script>
+    <script src="f_sources/js/dataManipulation.js"></script>
+  
+   	<% 
+  	String type=request.getParameter("action");
+	int swap;
+	if(type==null) swap=0;
+	else 
+		swap=(type.equals("studentlogin")? 0: 1);
+  %>
 </head>
 
-<body style="background-color: #5e5e5e">
+<body onload="disableDiv(<%=swap %>)" style="background-color: #5e5e5e">
     <!-- Page Content -->
     
  <div class="card text-center w-50 p-3 row align-items-center" style="height: 400px; background-color:#f6f5f5 ;margin: auto; outline: #c7004c solid 10px">
@@ -74,10 +64,12 @@
 			
 			<div class="input-group input-group-sm mb-3">
 			  <div class="input-group-prepend">
-			    <label class="font-weight-lighter font-italic ">You don't have an account? <a href="<%=request.getContextPath()%>/SiteNavigator?action=register">Register</a></label>
+			    <label class="font-weight-lighter font-italic ">You don't have an account? <a href="<%=request.getContextPath()%>/SiteNavigator?action=register&type=student">Register</a></label>
 			  </div>
 			</div>
-			
+			<div>
+		  	<input type="hidden" name="type" value="student"></input>
+		  </div>
 			<div class="input-group input-group-sm mb-3">
 			  <input  type="submit" value="Login" style="margin-right: auto;"  class="form-control btn btn-primary" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 			</div>
@@ -109,10 +101,12 @@
 		
 		<div class="input-group input-group-sm mb-3">
 		  <div class="input-group-prepend">
-		    <label class="font-weight-lighter font-italic ">You don't have an account? <a href="<%=request.getContextPath()%>/SiteNavigator?action=register">Register</a></label>
+		    <label class="font-weight-lighter font-italic ">You don't have an account? <a href="<%=request.getContextPath()%>/SiteNavigator?action=register&type=faculty">Register</a></label>
 		  </div>
 		</div>
-		
+		<div>
+		  	<input type="hidden" name="type" value="faculty"></input>
+		  </div>
 		<div class="input-group input-group-sm mb-3">
 		  <input  type="submit" value="Login" style="margin-right: auto;"  class="form-control btn btn-primary" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 		</div>
