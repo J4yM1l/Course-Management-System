@@ -4,7 +4,24 @@
     
 <!-- header -->
   <%@ include file="header_footer/header.txt"  %>
-  
+   <%
+  String username = null, sessionID = null;
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("username")) {
+					username = cookie.getValue();
+				}
+				if (cookie.getName().equals("JSESSIONID")) {
+					sessionID = cookie.getValue();
+				}
+			}
+		}
+		System.out.println(username +"  <---user"+ sessionID+"<----seesion");
+		if ((sessionID == null || username == null)) {
+			response.sendRedirect("index.jsp");
+		}
+	%>
   
     <!-- Page Content -->
     <div class="container">

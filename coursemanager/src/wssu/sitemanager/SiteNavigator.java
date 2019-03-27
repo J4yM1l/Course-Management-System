@@ -141,7 +141,7 @@ public class SiteNavigator extends HttpServlet {
 			    
 			    Cookie cookie = new Cookie("username", username);;
 				response.addCookie(cookie);
-				request.getRequestDispatcher("studenthome.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath()+"/StudentSiteNavigator?action="+username+"&nav=dashboard");
 			}else {
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 				System.out.println("Student login failed");
@@ -158,7 +158,7 @@ public class SiteNavigator extends HttpServlet {
 			if(connection.validateUser(username, password, 1)) {
 				connection.closeCon();
 				System.out.println("Faculty login successfull");
-				request.getRequestDispatcher("studenthome.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath()+"/FacultySiteNavigator?action="+username+"&nav=dashboard");
 			}else {
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 				System.out.println("Faculty login failed");

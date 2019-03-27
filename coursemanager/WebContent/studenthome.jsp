@@ -4,6 +4,7 @@
     
 <!-- header -->
   <%@ include file="header_footer/header.txt"  %>
+  <script src="f_sources/js/dataManipulation.js"></script>
  <%
   String username = null, sessionID = null;
 		Cookie[] cookies = request.getCookies();
@@ -24,36 +25,45 @@
 	%>
     <!-- Page Content -->
    <div class="container">
-   		<div class="row"">
-   		<div class="col-md-6"  style="margin-top: 40px">
-		 <div style="color: gray " class="col col-md-12 bg-dark" id="course-announcements">
-		 	<h4 style="text-align: center;">Course Announcements</h4>
-		 	<div style="height: 200px;">
-		 	</div>
-		 </div>
-		 </div>
-		 <div class="col-md-6" style="margin-top: 40px">
-		 <div style="color: gray " class="col col-md-12 bg-dark" id="favorite-courses">
-		 	<h4 style="text-align: center;">Favorite Courses</h4>
-		 	<div style="height: 200px;">
-		 	</div>
-		 </div>
-		 </div>
-		 <div class="col-md-6"  style="margin-top: 40px">
-		 <div style=" color: gray " class="text-center col col-md-12 bg-dark" id="favorite-courses-grade">
-			<h4 style="text-align: center;">Favorite Courses Grades</h4>
-			<div style="height: 200px; ">
-			</div>
-		 </div>
+   
+		 <div class="container">
+		  <div class="row">
+		    <div class="col-sm">
+				<div class="card">
+				  <h5 class="card-header">TODO List</h5>
+				  <div class="card-body">
+					<ul class="list-group" id="input-list">
+					</ul>
+					  <div class="input-group mb-3">
+						  <input type="text" class="form-control" id="todo-input" value="" placeholder="Add To TODO..." aria-label="todo list" aria-describedby="todo list">
+						  <div class="input-group-append">
+						    <button class="btn btn-outline-secondary btn-dark" type="button" onclick="add_to_Todo()" >Add</button>
+						  </div>
+					</div>
+				  </div>
+				</div>
+		    </div>
+		    <div class="col-sm">
+				<div class="card">
+				  <h5 class="card-header">Lowest Grade</h5>
+				  <div class="card-body">
+				    <h5 class="card-title">Special title treatment</h5>
+				    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+				  </div>
+				</div>
+		    </div>
+		    <div class="col-sm">
+				<div class="card">
+				  <h5 class="card-header">Calendar</h5>
+				  <div class="card-body">
+				    <h5 class="card-title">Special title treatment</h5>
+				    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+				  </div>
+				</div>
+		    </div>
+		  </div>
 		</div>
-		<div class="col-md-6"  style="margin-top: 40px">
-		 <div style=" color: gray " class="text-center col col-md-12 bg-dark" id="calendar">
-			<h4 style="text-align: center;">Calendar</h4>
-			<div style="height: 200px; ">
-			</div>
-		 </div>
-		</div>
-	</div>
+
 	</div>
   
   <!-- footer -->

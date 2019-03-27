@@ -30,7 +30,7 @@
 <body onload="disableDiv(<%=swap %>)" style="background-color: #5e5e5e">
     <!-- Page Content --> 
   <div class="card text-center w-75 p-3 row align-items-center" style=" background-color:#f6f5f5 ;margin: auto; outline: #c7004c solid 10px">
-   <h2 class="card-title font-weight-bold" style="color: #c7004c">WINSTON-SALEM STATE UNIVERSITY</h2>
+   <h2 class="card-title font-weight-bold" style="color: #c7004c">CS COURSE MANAGEMENT SYSTEM</h2>
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
@@ -51,7 +51,7 @@
 		  <div class="form-row">
 		    <div class="form-group col-md-4">
 		      <label for="inputfirstname">First Name</label>
-		      <input type="text" class="form-control" name="s_firstname" id="inputfirstname" placeholder="First" value="<%=(request.getParameter("s_firstname")!=null)? request.getParameter("s_firstname"): ""%>" >
+		      <input type="text" class="form-control" name="s_firstname" id="inputfirstname" placeholder="First" value="<%=(request.getParameter("s_firstname")!=null)? request.getParameter("s_firstname"): ""%>" required>
 		    </div>
 		    <div class="form-group col-md-4">
 		      <label for="inputmiddlename">Middle Name</label>
@@ -59,7 +59,7 @@
 		    </div>
 		    <div class="form-group col-md-4">
 		      <label for="inputlastname">Last Name</label>
-		      <input type="text" class="form-control" name="s_lastname"id="inputlastname" placeholder="Last" value="<%=(request.getParameter("s_lastname")!=null)? request.getParameter("s_lastname"): ""%>">
+		      <input type="text" class="form-control" name="s_lastname"id="inputlastname" placeholder="Last" value="<%=(request.getParameter("s_lastname")!=null)? request.getParameter("s_lastname"): ""%>" required>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -82,28 +82,28 @@
 		  </div>
 		  <div class="form-group">
 		    <label for="inputmajor">Major</label>
-		    <input type="text" name="s_major" class="form-control" id="inputmajor" placeholder="Major" value="<%=(request.getParameter("s_major")!=null)? request.getParameter("s_major"): ""%>">
+		    <input type="text" name="s_major" class="form-control" id="inputmajor" placeholder="Major" value="<%=(request.getParameter("s_major")!=null)? request.getParameter("s_major"): ""%>" required>
 		  </div>
 		  <div class="form-group">
 		    <label for="inputcontr">Concentration</label>
-		    <input type="text" name="s_concentration" class="form-control" id="inputcontr" placeholder="Concentration" value="<%=(request.getParameter("s_concentration")!=null)? request.getParameter("s_concentration"): ""%>">
+		    <input type="text" name="s_concentration" class="form-control" id="inputcontr" placeholder="Concentration" value="<%=(request.getParameter("s_concentration")!=null)? request.getParameter("s_concentration"): ""%>" required>
 		  </div>
 		  <div class="form-group">
 		    <label for="inputclass">Classification</label>
-		    <input type="text" name="s_class" class="form-control" id="inputclass" placeholder="Freshmen/Senior" value="<%=(request.getParameter("s_class")!=null)? request.getParameter("s_class"): ""%>">
+		    <input type="text" name="s_class" class="form-control" id="inputclass" placeholder="Freshmen/Senior" value="<%=(request.getParameter("s_class")!=null)? request.getParameter("s_class"): ""%>" required>
 		  </div>
 		  <div class="form-group">
 		    <label for="date">Date of Birth</label>
-		    <input type="text" id="date" name="s_bd_day" placeholder="YYYY"  class="form-control" value="<%=(request.getParameter("s_bd_day")!=null)? request.getParameter("s_bd_day"): ""%>">
+		    <input type="text" id="date" name="s_bd_day" placeholder="YYYY"  class="form-control" value="<%=(request.getParameter("s_bd_day")!=null)? request.getParameter("s_bd_day"): ""%>" required>
 		  </div>
 		  <div class="form-group">
 		    <label for="inputcontr">Gender</label>
 		    <div class="form-check">
-			  <input class="form-check-input" type="radio" name="s_gender" id="gender_m" value="male" <%=(request.getParameter("s_gender")!=null && request.getParameter("s_gender").equals("male"))? "checked" : "unchecked"%>>
+			  <input class="form-check-input" type="radio" name="s_gender" id="gender_m" value="male" <%=(request.getParameter("s_gender")!=null && request.getParameter("s_gender").equals("male"))? "checked" : "unchecked"%> required>
 			  <label class="form-check-label" for="gender_m">Male</label>
 			</div>
 			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="s_gender" id="gender_f" value="female" <%=(request.getParameter("s_gender")!=null && request.getParameter("s_gender").equals("female"))  ? "checked": "unchecked"%>>
+			  <input class="form-check-input" type="radio" name="s_gender" id="gender_f" value="female" <%=(request.getParameter("s_gender")!=null && request.getParameter("s_gender").equals("female"))  ? "checked": "unchecked"%> required>
 			  <label class="form-check-label" for="gender_f">Female</label>
 			</div>
 		  </div>
@@ -112,7 +112,7 @@
 		  </div>
 		  <div class="form-group">
 		    <label for="inputusername">Create Username</label>
-		    <input type="text" name="s_username" class="form-control" id="inputusername" placeholder="New Username" value="<%=(request.getParameter("s_username")!=null)? request.getParameter("s_username"): ""%>">
+		    <input type="text" name="s_username" class="form-control" id="inputusername" placeholder="New Username" value="<%=(request.getParameter("s_username")!=null)? request.getParameter("s_username"): ""%>" required>
 		  </div>
 		  <div class="form-group">
 		
@@ -120,11 +120,11 @@
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		    <label for="inputusername">Password</label>
-		    <input type="text" name="s_password" class="form-control" id="inputpassword" placeholder="New Password">
+		    <input type="text" name="s_password" class="form-control" id="inputpassword" placeholder="New Password" required>
 		    </div>
 		   	<div class="form-group col-md-6">
 		    <label for="inputusername">Re-enter Password</label>
-		    <input type="text" name="s_password2" class="form-control" id="inputpassword" placeholder="Re-enter Password">
+		    <input type="text" name="s_password2" class="form-control" id="inputpassword" placeholder="Re-enter Password" required>
 		    </div>
 		  </div>
 		  <div class="input-group input-group-sm mb-3" style="margin-right: auto;">
@@ -142,7 +142,7 @@
 	 
 	<div id="faculty"  style="display: none">
 	<div class="card-body">
-    <h3 class="card-title font-weight-bold" style="color: #c7004c">Faculty/Staff Registration</h3>
+    <h3 class="card-title font-weight-bold" style="color: #c7004c">Faculty Registration</h3>
     
       <div class="container" >
 	  <!-- form -->
@@ -150,7 +150,7 @@
 		  <div class="form-row">
 		    <div class="form-group col-md-4">
 		      <label for="inputfirstname">First Name</label>
-		      <input type="text" class="form-control" name="f_firstname" id="inputfirstname" placeholder="First" value="<%=(request.getParameter("f_firstname")!=null)? request.getParameter("f_firstname"): ""%>">
+		      <input type="text" class="form-control" name="f_firstname" id="inputfirstname" placeholder="First" value="<%=(request.getParameter("f_firstname")!=null)? request.getParameter("f_firstname"): ""%>" required>
 		    </div>
 		    <div class="form-group col-md-4">
 		      <label for="inputmiddlename">Middle Name</label>
@@ -158,7 +158,7 @@
 		    </div>
 		    <div class="form-group col-md-4">
 		      <label for="inputlastname">Last Name</label>
-		      <input type="text" class="form-control" name="f_lastname"id="inputlastname" placeholder="Last" value="<%=(request.getParameter("f_lastname")!=null)? request.getParameter("f_lastname"): ""%>">
+		      <input type="text" class="form-control" name="f_lastname"id="inputlastname" placeholder="Last" value="<%=(request.getParameter("f_lastname")!=null)? request.getParameter("f_lastname"): ""%>" required>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -186,16 +186,16 @@
 		  </div>
 		  <div class="form-group">
 		    <label for="inputDep">Department</label>
-		    <input type="text" id="text" name="f_department" placeholder="Department"  class="form-control" value="<%=(request.getParameter("f_department")!=null)? request.getParameter("f_department"): ""%>">
+		    <input type="text" id="text" name="f_department" placeholder="Department"  class="form-control" value="<%=(request.getParameter("f_department")!=null)? request.getParameter("f_department"): ""%>" required>
 		  </div>
 		  <div class="form-group">
 		    <label for="inputcontr">Gender</label>
 		    <div class="form-check">
-			  <input class="form-check-input" type="radio" name="f_gender" id="gender_m" value="male" <%=(request.getParameter("f_gender")!=null && request.getParameter("f_gender").equals("male"))? "checked" : "unchecked"%>>
+			  <input class="form-check-input" type="radio" name="f_gender" id="gender_m" value="male" <%=(request.getParameter("f_gender")!=null && request.getParameter("f_gender").equals("male"))? "checked" : "unchecked"%> required>
 			  <label class="form-check-label" for="gender_m">Male</label>
 			</div>
 			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="f_gender" id="gender_f" value="female" <%=(request.getParameter("f_gender")!=null && request.getParameter("f_gender").equals("female"))? "checked" : "unchecked"%>>
+			  <input class="form-check-input" type="radio" name="f_gender" id="gender_f" value="female" <%=(request.getParameter("f_gender")!=null && request.getParameter("f_gender").equals("female"))? "checked" : "unchecked"%> required>
 			  <label class="form-check-label" for="gender_f">Female</label>
 			</div>
 		  </div>
@@ -204,7 +204,7 @@
 		  </div>
 		  <div class="form-group">
 		    <label for="inputusername">Create Username</label>
-		    <input type="text" name="f_username" class="form-control" id="inputusername" placeholder="New Username" value="<%=(request.getParameter("f_username")!=null)? request.getParameter("f_username"): ""%>">
+		    <input type="text" name="f_username" class="form-control" id="inputusername" placeholder="New Username" value="<%=(request.getParameter("f_username")!=null)? request.getParameter("f_username"): ""%>" required>
 		  </div>
 		  <div class="form-group">
 
@@ -212,11 +212,11 @@
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		    <label for="inputusername">Password</label>
-		    <input type="text" name="f_password" class="form-control" id="inputpassword" placeholder="New Password">
+		    <input type="text" name="f_password" class="form-control" id="inputpassword" placeholder="New Password" required>
 		    </div>
 		   	<div class="form-group col-md-6">
 		    <label for="inputusername">Re-enter Password</label>
-		    <input type="text" name="f_password2" class="form-control" id="inputpassword" placeholder="Re-enter Password">
+		    <input type="text" name="f_password2" class="form-control" id="inputpassword" placeholder="Re-enter Password" required>
 		    </div>
 		  </div>
 		  <div class="input-group input-group-sm mb-3" style="margin-right: auto;">

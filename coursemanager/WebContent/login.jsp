@@ -52,14 +52,14 @@
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="inputGroup-sizing-sm"><span class="glyphicon glyphicon-user"></span>Username</span>
 			  </div>
-			  <input type="text" name="username" placeholder="Student ID" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+			  <input type="text" name="username" placeholder="Student ID" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
 			</div>
 			
 			<div class="input-group input-group-sm mb-3">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="inputGroup-sizing-sm"><span class="glyphicon glyphicon-user"></span>Password</span>
 			  </div>
-			  <input type="password" name="password" placeholder="Enter Password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+			  <input type="password" name="password" placeholder="Enter Password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
 			</div>
 			
 			<div class="input-group input-group-sm mb-3">
@@ -89,14 +89,14 @@
 		  <div class="input-group-prepend">
 		    <span class="input-group-text" id="inputGroup-sizing-sm"><span class="glyphicon glyphicon-user"></span>Username</span>
 		  </div>
-		  <input type="text" name="username" placeholder="Faculty/Staff ID" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+		  <input type="text" name="username" placeholder="Faculty/Staff ID" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
 		</div>
 		
 		<div class="input-group input-group-sm mb-3">
 		  <div class="input-group-prepend">
 		    <span class="input-group-text" id="inputGroup-sizing-sm"><span class="glyphicon glyphicon-user"></span>Password</span>
 		  </div>
-		  <input type="password" name="password" placeholder="Enter Password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+		  <input type="password" name="password" placeholder="Enter Password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
 		</div>
 		
 		<div class="input-group input-group-sm mb-3">

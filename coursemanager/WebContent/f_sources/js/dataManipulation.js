@@ -15,4 +15,16 @@
   			s_active.classList.remove("active")
 			}
   	}
-  	
+  	var count=0;
+  	function add_to_Todo(){
+  		var input=document.getElementById("todo-input");
+  		if(input.value.trim()==="")return;
+  		var list=document.getElementById("input-list");
+  		var li = document.createElement("li");
+  		li.appendChild(document.createTextNode(input.value));
+  		li.setAttribute("id", count);
+  		li.setAttribute("class", "list-group-item");
+  		list.appendChild(li);
+  		input.value="";
+  		count++;
+  	}

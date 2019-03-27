@@ -10,7 +10,7 @@
 </head>
 <body  style="background-color: #5e5e5e">
 
-<h1 class="card-title font-weight-bold card-text" style="text-align: center; color: #c7004c">WINSTON-SALEM STATE UNIVERSITY</h1>
+<h1 class="card-title font-weight-bold card-text" style="text-align: center; color: #c7004c">CS COURSE MANAGEMENT SYSTEM</h1>
 
 <div style="margin-top: 100px;">
 	<div class="row" style="margin: auto; width:60%">
