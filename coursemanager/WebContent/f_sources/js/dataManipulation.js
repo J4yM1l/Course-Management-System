@@ -18,13 +18,85 @@
   	var count=0;
   	function add_to_Todo(){
   		var input=document.getElementById("todo-input");
+
   		if(input.value.trim()==="")return;
-  		var list=document.getElementById("input-list");
-  		var li = document.createElement("li");
-  		li.appendChild(document.createTextNode(input.value));
-  		li.setAttribute("id", count);
-  		li.setAttribute("class", "list-group-item");
-  		list.appendChild(li);
+  		var list=document.getElementById("table-body");
+  		var tr = document.createElement("tr");
+  		tr.setAttribute("id", count);
+  		var td_content = document.createElement("td");
+  		var td_button=document.createElement("td");
+  		td_content.setAttribute("id","content"+count.toString());
+  		td_content.setAttribute("style", "text-align:left");
+  		td_content.setAttribute("style", "text-decoration: none");
+  		td_content.appendChild(document.createTextNode(input.value));
+
+  		td_button.setAttribute("style", "text-align:right; width:20%")
+  		var anchor=document.createElement("a");
+  		anchor.setAttribute("href","#main-table");
+  		anchor.appendChild(document.createTextNode("x"));
+  		anchor.setAttribute("id","anchor"+count);
+  		//anchor.setAttribute("onClick",close(+count));
+  		td_button.appendChild(anchor);
+  		tr.appendChild(td_content);
+  		tr.appendChild(td_button);
+  		list.appendChild(tr);
+  		//tr.setAttribute("onClick", "action(content"+count.toString()+")");
+  		
   		input.value="";
   		count++;
   	}
+  	
+  	function action(tr){
+			document.getElementById(tr).style.textDecoration="line-through";
+  	}
+  	function close(tr){
+  		console.log("Element: "+tr+"--"+document.getElementById(tr));
+  		document.getElementById(tr).setAttribute("style", "display:none");
+  	}
+  	
+  	function setMenuActive(link){
+  		var n0=document.getElementById("n0");
+  		var n1=document.getElementById("n1");
+  		var n2=document.getElementById("n2");
+  		var n3=document.getElementById("n3");
+  		var n4=document.getElementById("n4");
+
+
+  		if(link.equals("dashboard")){
+  			n0.classList.add("active");
+  			n1.classList.remove("active");
+  			n2.classList.remove("active");
+  			n3.classList.remove("active");
+  			n4.classList.remove("active");
+
+  		}else if(link.equals("grades")){
+  			n0.classList.remove("active");
+  			n1.classList.remove("active");
+  			n2.classList.remove("active");
+  			n3.classList.add("active");
+  			n4.classList.remove("active");
+
+  		}else if(link.equals("profile")){
+  			n0.classList.remove("active");
+  			n1.classList.remove("active");
+  			n2.classList.remove("active");
+  			n3.classList.remove("active");
+  			n4.classList.add("active");
+
+  		}else if(link.equals("registration")){
+  			n0.classList.remove("active");
+  			n1.classList.add("active");
+  			n2.classList.remove("active");
+  			n3.classList.remove("active");
+  			n4.classList.remove("active");
+
+  		}else if(link.equals("student_schedule")){
+  			n0.classList.remove("active");
+  			n1.classList.remove("active");
+  			n2.classList.add("active");
+  			n3.classList.remove("active");
+  			n4.classList.remove("active");
+  		}
+  			
+  	}
+  	
