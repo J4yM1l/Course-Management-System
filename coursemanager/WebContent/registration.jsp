@@ -25,39 +25,48 @@
   
     <!-- Page Content -->
     <div class="container">
-    	<div class="row">
-	  <div class="col-md-6" style="background-color: #f6f5f5; width: 50%; float: left;">
-	  	<div >
-	  		<div style="background-color:#dadddf ;"><h4>Available Courses</h4></div>
-	  		<div style="background-color:#ffefe0">
-	  			<div style="border-style:dotted; margin: 10px; border-color: gray;">
-	  				<label>CSC 1310 Computer Program. I</label>
-	  				<input type="button" name="add" value="Add" style="float: right">
-	  			</div>
-	  			<div style="border-style:dotted; margin:10px; ">
-	  				<label>CSC 1311 Computer Program. II</label>
-	  				<input type="button" name="add" value="Add" style="float: right">
-	  			</div>
-	  			<div style="border-style:dotted; margin: 10px;">
-	  				<label>CSC 4323 System Admim II</label>
-	  				<input type="button" name="add" value="Add" style="float: right">
-	  			</div>
-	  		</div>
-	  	</div> 	
-	  </div>
-	  <div class="col-md-6" style="background-color: #f6f5f5; width: 50%; float: right; display: block;">
-	  	<div >
-	  		<div style="background-color:#dadddf ;"><h4>Added Courses</h4></div>
-	  		<div style="background-color:#ffefe0">
-				<div style="border-style:dotted; margin: 10px">
-	  				<label>CSC 1310 Computer Program. I</label>
-	  				<input type="button" name="add" value="Remove" style="float: right">
-	  			</div>
-	
-			</div>
-	  	</div> 	
-	  </div>
-	  </div>
+    <form class="form-inline" style="margin: auto" action="<%=request.getContextPath()%>/StudentSiteNavigator?action=register" method="post">
+	  <div class="form-inline" style="margin: auto">
+  			<select class="form-control form-control-sm" name="semester">
+			  <option>Select Semester</option>
+			  <option>Fall</option>
+			  <option>Winter</option>
+			  <option>Summer I</option>
+			  <option >Summer II</option>  
+			</select><br/>
+		  <input type="number" class="form-control form-control-sm" placeholder="Enter Year" id="year">
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</form><br/>
+    
+	    <table class="table table-hover ">
+	    <thead class="thead-light">
+	      <tr>
+	        <th>Available Courses to Add</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <td>
+        		<div class="card">
+				  <div class=""style="display:inline">
+				    <label class="card-title font-weight-bold"> Name: </label>
+				    <label>Computer Programming I</label><br/>
+				    <label class="card-title font-weight-bold"> Professor: </label>
+				    <label>Elva Jones</label><br/>
+				   	<label class="card-title font-weight-bold"> Meet At: </label>
+				    <label>Computer Science Building</label><br/>
+				    <label class="card-title font-weight-bold"> Room Number: </label>
+				    <label>#3103</label>
+				    <button type="button" class="btn btn-success btn float-right">Add</button>
+				  </div>
+				  
+				</div>
+	        </td>
+	      </tr>
+
+	    </tbody>
+	  </table>
 	</div>
   <!-- footer -->
   <%@ include file="header_footer/footer.txt"  %>

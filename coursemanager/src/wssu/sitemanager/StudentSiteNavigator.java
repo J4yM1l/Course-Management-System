@@ -1,17 +1,23 @@
 package wssu.sitemanager;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import wssu.javaclasses.Connect;
+import wssu.javaclasses.Student;
+
 /**
  * Servlet implementation class StudentSiteNavigator
  */
 @WebServlet("/StudentSiteNavigator")
 public class StudentSiteNavigator extends HttpServlet {
+	Student student;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -30,8 +36,15 @@ public class StudentSiteNavigator extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String action =request.getParameter("action");
 		String nav=request.getParameter("nav");
+		//student=(Student)request.getParameter("student");
 		switch(nav){
 			case "dashboard":
+				try {
+				Connect con=new Connect();
+				student=(Student)request.getAttribute("student");
+				request.setAttribute("allCourses", con.getAllCourses());
+				con.closeCon();
+				}catch(Exception e) {}
 				request.getRequestDispatcher("studenthome.jsp").forward(request, response);
 				break;
 			case "grades":
@@ -55,7 +68,29 @@ public class StudentSiteNavigator extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String action=request.getParameter("action");
+		switch(action) {
+			case "taken":
+				getAllCoursesTaken(request, response);
+				break;
+		}
+	}
+	
+	private void getAllCoursesTaken(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		try {
+			String course=request.getParameter("course");
+			String semester=request.getParameter("semester");
+			int year=Integer.parseInt(request.getParameter("year"));
+			Connect con=new Connect();
+			request.setAttribute("allCourses", con.getAllCourses());
+			request.setAttribute("taken", con.courseTakenInSpecificYear(course, semester, year));
+			con.closeCon();
+			request.getRequestDispatcher("studenthome.jsp").forward(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

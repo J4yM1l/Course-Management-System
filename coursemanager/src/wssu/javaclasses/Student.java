@@ -7,13 +7,13 @@ import java.sql.Statement;
 
 public class Student {
 	
-	private String fName, mName, lName;
-	private String major, byear, level;
-	private String username, password;
-	private int pk;
-	private Connection connection=null;
-    private Statement stmt = null;
-    private ResultSet rs = null;
+	private static String fName, mName, lName;
+	private static String major, byear, level;
+	private static String username, password;
+	private static int pk;
+	private static Connection connection=null;
+    private static Statement stmt = null;
+    private static ResultSet rs = null;
     
 	public Student(Connection connect, String username, String passord) throws SQLException {
 		this.username=username.toLowerCase().trim();
@@ -26,7 +26,7 @@ public class Student {
         rs = stmt.executeQuery(sql);
 	}
 	
-	public boolean validate() throws SQLException{
+	public static boolean validate() throws SQLException{
 		if(username.equals("") || password.equals("")) return false;
 		String tusername=null, tpassword=null;
 		while(rs.next())
@@ -38,6 +38,17 @@ public class Student {
         if(tusername.equals(username) && tpassword.equals(password)) {
         	return true;}
 	   return false;
+	}
+	
+	private static String[][] getAllCoursesTaken(String course, String semester, int year){
+		try {
+			Connect con=new Connect();
+			String[][] data=con.courseTakenInSpecificYear(course, semester, year);
+			con.closeCon();
+			return data;
+		}catch(Exception e)	{}
+
+		return null;
 	}
 
 }

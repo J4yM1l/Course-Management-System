@@ -4,6 +4,8 @@
     
 <!-- header -->
   <%@ include file="header_footer/header.txt"  %>
+    <script src="f_sources/js/dataManipulation.js"></script>
+  
  <%
   String username = null, sessionID = null;
 		Cookie[] cookies = request.getCookies();
@@ -32,7 +34,7 @@
 				  <h5 class="card-header">TODO List</h5>
 				<div class="card-body">	
 					<table class="table table-hover">
-					  <thead class="thead-dark">
+					  <thead class="thead-light">
 					    <tr>
 					      <th scope="col" style="text-align:left;">Task</th>
 					      <th scope="col" style="text-align:right; width:20%"></th>  
@@ -51,82 +53,72 @@
 				</div>
 			  </div>
 		    </div>
-		    <div class="col-lg" style="margin: 6px">
-				<div class="card">
-				  <h5 class="card-header">Course Summary</h5>
-				  <div class="card-body">
-				  <h5>Above Average</h5>
-				   <table class="table">
-				  <thead class="thead-dark">
-				    <tr>
-				      <th scope="col">Course</th>
-				      <th scope="col">Professor</th>
-				      <th scope="col">Grade</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr>
-				      <td>Computer Programming</td>
-				      <td>Mark</td>
-				      <td>95%</td>
-				    </tr>
-
-				  </tbody>
-				</table>
-				<h5>Below Average</h5>
-				<table class="table">
-				  <thead class="thead-dark">
-				    <tr>
-				      <th scope="col">Course</th>
-				      <th scope="col">Professor</th>
-				      <th scope="col">Grade</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr>
-				      <td>Computer Programming</td>
-				      <td>Mark</td>
-				      <td>70%</td>
-				    </tr>
-
-				  </tbody>
-				</table>
-				  </div>
-				</div>
-		    </div> 
+	
 		    
 		     <div class="col-lg" style="margin: 6px">
 				<div class="card">
 				  <h5 class="card-header">Course Rooster</h5>
 				  <div class="card-body">
 				 <!-- Begin -->
-				 <form class="form-inline">
-				  <div class="form-group mb-2">
-				    <label for="course-description" class="sr-only">Email</label>
-					<!-- Select tag here -->
-				  </div>
-				  <div class="form-group mx-sm-3 mb-2">
-				    <label for="inputPassword2" class="sr-only">Password</label>
-				    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-				  </div>
-				  <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-				</form>
+				<form action="<%=request.getContextPath()%>/StudentSiteNavigator?action=taken" method="post" onSubmit="onSubmitDeleteRows(allcourse)">
+					<select class="form-control form-control-sm" name="course">
+					  <option selected>Select Course</option>
+					  <%String[][] data=(String[][]) request.getAttribute("allCourses");
+					  	if(data!=null){
+					  	for(int i=0; i<data.length; i++){
+					  		if(data[i][1]==null){break;}%>
+					  		<option> <%=data[i][1]%> </option><%
+					  	}}	
+					  %>
+					</select><br/>
+					<select class="form-control form-control-sm" name="semester">
+					  <option>Select Semester</option>
+					  <option>Fall</option>
+					  <option>Winter</option>
+					  <option>Summer I</option>
+					  <option >Summer II</option>  
+					</select><br/>
+					<input class="form-control form-control-sm" type="number" name="year" placeholder="Enter Year" required >
+					<br/>
+					<div class="form-group row">
+					    <div class="col-md-10">
+					      <button type="submit" class="btn btn-primary text-center col-md-4" style="margin: auto;">Search</button>
+					    </div>
+					 </div>				
+	  			</form>
 				  <!-- end -->
-				   <table class="table">
-				  <thead class="thead-dark">
+				  <h3><%=(request.getParameter("course")!=null && !request.getParameter("course").equals("Select Course")? request.getParameter("course"): "" ) %></h3>
+				   <table class="table" id="allcourse">
+				  <thead class="thead-light">
 				    <tr>
 				      <th scope="col">Student</th>
 				      <th scope="col">Professor</th>
+				      <th scope="col">Semester</th>
 				      <th scope="col">Year</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <td>Computer Programming</td>
-				      <td>Mark</td>
-				      <td>95%</td>
-				    </tr>
-
+				  	<%
+				  		String[][] result=(String[][])request.getAttribute("taken");
+				  		if(result!=null){
+				  		for(int i=0; i<result.length; i++){
+				  			if(result[i][0]==null)break;				  			
+				  	%>
+					    <tr>
+					      <td><%=result[i][0] %></td>
+					      <td><%=result[i][1] %></td>
+					      <td><%=request.getParameter("semester") %></td>
+					      <td><%=request.getParameter("year") %></td>
+					    </tr>
+				    <%}
+				  		}%>
+				  		
+				  		<tr id="none"class="text-center font-italic small">
+					      <td>Nothing to Show</td>
+					      <td>Nothing to Show</td>
+					      <td>Nothing to Show</td>
+					      <td>Nothing to Show</td>
+					    </tr>
 				  </tbody>
 		     </table>
 		  </div>

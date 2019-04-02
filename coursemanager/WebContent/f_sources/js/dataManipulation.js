@@ -99,4 +99,22 @@
   		}
   			
   	}
+  	function unselectOption(id, name) {
+  	  var option = document.getElementByID(id);
+  	  option.options[list.selectedIndex].selected=false;
+	  for(var i=0; i<option.length; i++){
+		  if(option.options[i].text.equals(name))
+			  option.options[i].selected=true; return;}
+	  option.options[0].selected=true;
+  	}
+  	
+  	function onSubmitDeleteRows(id){
+  		var table=document.getElementById(id);
+  		for(var i=0; i<table.rows.length-1; i++) {
+			var row = table.rows[i];
+			//if(table.rows[i].id=="none") {break;}
+				table.deleteRow(i);
+		}
+
+  	}
   	
