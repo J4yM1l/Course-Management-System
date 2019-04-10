@@ -35,7 +35,9 @@ public class StudentSiteNavigator extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String action =request.getParameter("action");
+		System.out.println("Getting request parameter: " + action);
 		String nav=request.getParameter("nav");
+		System.out.println("Getting nav request parameter: " + nav);
 		//student=(Student)request.getParameter("student");
 		switch(nav){
 			case "dashboard":
@@ -69,6 +71,7 @@ public class StudentSiteNavigator extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action=request.getParameter("action");
+		System.out.println("Getting post request parameter: " + action);
 		switch(action) {
 			case "taken":
 				getAllCoursesTaken(request, response);

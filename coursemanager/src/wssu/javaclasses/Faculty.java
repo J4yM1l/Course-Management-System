@@ -21,7 +21,7 @@ public class Faculty {
 		connection=connect;
 		String sql="select * from facultycredential c"
 				+ " where username='"+ username +"'"
-				+ " and password='"+password+"'";
+				+ " and password='"+ password +"'";
 		stmt = connection.createStatement();
         rs = stmt.executeQuery(sql);
 	}
@@ -34,7 +34,8 @@ public class Faculty {
 			tusername=rs.getString("username");
 			tpassword=rs.getString("password");
 		}
-		if(tusername==null || tpassword==null)return false;
+		if(tusername==null || tpassword==null)
+			return false;
 		System.out.println(tusername+" "+tpassword +"  "+rs.next());
         if(tusername.equals(username) && tpassword.equals(password)) {
         	return true;}
