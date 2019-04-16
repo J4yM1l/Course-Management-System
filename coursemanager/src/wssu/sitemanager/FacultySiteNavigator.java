@@ -72,8 +72,8 @@ public class FacultySiteNavigator extends HttpServlet {
 		// TODO Auto-generated method stub
 		String action=request.getParameter("action");
 		switch(action) {
-			case "taken":
-				getAllCoursesTaken(request, response);
+			case "addcourse":
+				addCourses(request, response);
 				break;
 		}
 	}
@@ -89,6 +89,22 @@ public class FacultySiteNavigator extends HttpServlet {
 			con.closeCon();
 			request.getRequestDispatcher("studenthome.jsp").forward(request, response);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void addCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			String fCourse = request.getParameter("courses");
+			String fSemester = request.getParameter("semester");
+			System.out.println("Faculty Course: " + fCourse);
+			System.out.println("Semester: " + fSemester);
+			request.setAttribute("faculty_courses", fCourse);
+			request.setAttribute("faculty_semester", fSemester);
+			request.getRequestDispatcher("facultyAddCourse.jsp").forward(request, response);
+		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
