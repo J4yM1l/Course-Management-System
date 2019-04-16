@@ -165,6 +165,15 @@ public class SiteNavigator extends HttpServlet {
 				System.out.println("Faculty info: " + faculty.toString());
 				connection.closeCon();
 				System.out.println("Faculty login successfull");
+				
+				request.getSession().invalidate();
+				HttpSession newSession = request.getSession(true);
+			    newSession.setMaxInactiveInterval(300);
+			    newSession.setAttribute("username", username);
+			    
+			    Cookie cookie = new Cookie("username", username);;
+				response.addCookie(cookie);
+				student=connection.getStudentInfo();
 				request.setAttribute("faculty", faculty);
 				response.sendRedirect(request.getContextPath()+"/FacultySiteNavigator?action="+username+"&fnav=dashboard");
 			}else {
