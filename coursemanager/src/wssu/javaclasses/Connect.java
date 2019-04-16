@@ -137,13 +137,13 @@ public class Connect
     public String[] getAllOffers(String semester, int year)throws SQLException  {
     	String sql="select c.cid, c.cname, c.meets_at, c.room, f.lname " + 
     			"from Faculty f, Course c, Offered o" + 
-    			" where o.oid=e.oid and c.cid=o.cid and f.fid=o.fid and o.semester='"+semester.toLowerCase()+"' and o.year="+year+"";
+    			" where c.cid=o.cid and f.fid=o.fid and o.semester='"+semester.toLowerCase()+"' and o.year="+year+"";
 		stmt = connection.createStatement();
         rs = stmt.executeQuery(sql);
         String[] data=new String[rs.getFetchSize()];
         int index=0;
         while(rs.next()) {
-        	data[index]=String.valueOf(rs.getInt(0))+" "+ rs.getString(1)+" "+ rs.getString(2)+ " "+ rs.getString(3)
+        	data[index]=(rs.getString(2))+"&"+ rs.getString(5)+"&"+ rs.getString(3)+ "&"+ rs.getString(4);
         	index++;
         }
         System.out.println("Obtained Courses Taken");

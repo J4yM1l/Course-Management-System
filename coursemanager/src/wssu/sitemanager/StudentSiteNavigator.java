@@ -73,6 +73,9 @@ public class StudentSiteNavigator extends HttpServlet {
 			case "taken":
 				getAllCoursesTaken(request, response);
 				break;
+			case "register":
+				getAllCoursess(request, response);
+				break;
 		}
 	}
 	
@@ -86,6 +89,21 @@ public class StudentSiteNavigator extends HttpServlet {
 			request.setAttribute("taken", con.courseTakenInSpecificYear(course, semester, year));
 			con.closeCon();
 			request.getRequestDispatcher("studenthome.jsp").forward(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void getAllCoursess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		try {
+			String semester=request.getParameter("semester");
+			int year=Integer.parseInt(request.getParameter("year"));
+			Connect con=new Connect();
+			request.setAttribute("offered", con.getAllOffers(semester, year));
+			con.closeCon();
+			request.getRequestDispatcher("registration.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
