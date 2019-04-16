@@ -39,7 +39,8 @@ public class Connect
     }
     Student student=null;
     Faculty faculty=null;
-    public boolean validateUser(String username, String password, int type) throws SQLException {
+    @SuppressWarnings("static-access")
+	public boolean validateUser(String username, String password, int type) throws SQLException {
     	if(type==0) {
 	    	student=new Student(connection, username, password);
 	        return (student.validate());
@@ -143,7 +144,11 @@ public class Connect
         String[] data=new String[rs.getFetchSize()];
         int index=0;
         while(rs.next()) {
+<<<<<<< HEAD
         	data[index]=(rs.getString(2))+"&"+ rs.getString(5)+"&"+ rs.getString(3)+ "&"+ rs.getString(4);
+=======
+        	data[index]=String.valueOf(rs.getInt(0))+" "+ rs.getString(1)+" "+ rs.getString(2)+ " "+ rs.getString(3);
+>>>>>>> 67adceabbd77a2236f572710a18f5297e1b904f4
         	index++;
         }
         System.out.println("Obtained Courses Taken");

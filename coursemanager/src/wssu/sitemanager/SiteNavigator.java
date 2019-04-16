@@ -162,10 +162,11 @@ public class SiteNavigator extends HttpServlet {
 			String password = request.getParameter("password").toString();
 			if(connection.validateUser(username, password, 1)) {
 				faculty=connection.getFacultyInfo();
+				System.out.println("Faculty info: " + faculty.toString());
 				connection.closeCon();
 				System.out.println("Faculty login successfull");
 				request.setAttribute("faculty", faculty);
-				response.sendRedirect(request.getContextPath()+"/FacultySiteNavigator?action="+username+"&nav=dashboard");
+				response.sendRedirect(request.getContextPath()+"/FacultySiteNavigator?action="+username+"&fnav=dashboard");
 			}else {
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 				System.out.println("Faculty login failed");
