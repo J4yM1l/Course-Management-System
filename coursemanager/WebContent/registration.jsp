@@ -47,7 +47,9 @@
 	    </thead>
 	    <tbody>
 	    <% 
+
 	    	String[] data=(String[])request.getAttribute("offered");
+	    	String c;
 	    	if(data!=null){
     		System.out.println(data[0]);
 	    	StringTokenizer token=new StringTokenizer("");
@@ -56,11 +58,14 @@
 	    		System.out.println(data[i]);
 	    		if(data[i]==null)break;
 	    		token=new StringTokenizer(data[i],"&");
+	    		c=token.nextToken(); 
 	    	%>
 	      <tr>
 	        <td>
         		<div class="card">
 				  <div class=""style="display:inline">
+				  	<label class="card-title font-weight-bold"> ID#: </label>
+				    <label name="<%=c%>"><%=c%></label><br/>
 				    <label class="card-title font-weight-bold"> Name: </label>
 				    <label><%=token.nextToken() %></label><br/>
 				    <label class="card-title font-weight-bold"> Professor: </label>
@@ -69,7 +74,8 @@
 				    <label><%=token.nextToken() %></label><br/>
 				    <label class="card-title font-weight-bold"> Room Number: </label>
 				    <label><%=token.nextToken() %></label>
-				    <button type="button" class="btn btn-success btn float-right">Add</button>
+				    <input type="hidden" name="oid"></input>
+				    <button type="submit" class="btn btn-success btn float-right" onclick=""></button>
 				  </div>
 				  
 				</div>
