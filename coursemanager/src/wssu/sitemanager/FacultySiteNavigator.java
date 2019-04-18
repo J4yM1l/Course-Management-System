@@ -1,6 +1,8 @@
 package wssu.sitemanager;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,9 +37,9 @@ public class FacultySiteNavigator extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		 action =request.getParameter("action");
-		 System.out.println("Getting request parameter: " + action);
+		 System.out.println("Get request action parameter: " + action);
 		 fnav=request.getParameter("fnav");
-		 System.out.println("Getting get request parameter: " + fnav);
+		 System.out.println("Get request fnav parameter: " + fnav);
 		//student=(Student)request.getParameter("student");
 		switch(fnav){
 			case "dashboard":
@@ -50,6 +52,10 @@ public class FacultySiteNavigator extends HttpServlet {
 				request.getRequestDispatcher("Faculty_home.jsp").forward(request, response);
 				break;
 			case "addclass":
+				Object[] fc = (Object[])courses.toArray();
+				Object[] fsem = (Object[])semester.toArray();
+				request.setAttribute("faculty_courses", fc);
+				request.setAttribute("faculty_semester", fsem);
 				request.getRequestDispatcher("facultyAddCourse.jsp").forward(request, response);
 				break;
 				
@@ -62,6 +68,7 @@ public class FacultySiteNavigator extends HttpServlet {
 			case "student_schedule":
 				request.getRequestDispatcher("student_schedule.jsp").forward(request, response);
 				break;
+	
 		}
 	}
 
@@ -71,9 +78,12 @@ public class FacultySiteNavigator extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action=request.getParameter("action");
+		System.out.println("post request action " + action);
+		String button=request.getParameter("remove");
+		 System.out.println("post request button parameter: " + button);
 		switch(action) {
-			case "taken":
-				getAllCoursesTaken(request, response);
+			case "addcourse":
+				addCourses(request, response);
 				break;
 		}
 	}
@@ -94,5 +104,45 @@ public class FacultySiteNavigator extends HttpServlet {
 		}
 		
 	}
+	
+	static ArrayList<String> courses = new ArrayList<String>();
+	static ArrayList<String> semester = new ArrayList<String>();
+	public void addCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			String fCourse = request.getParameter("courses");
+			String fSemester = request.getParameter("semester");
+			System.out.println("Faculty Course: " + fCourse);
+			System.out.println("Semester: " + fSemester);
+			courses.add(fCourse);
+			Object[] arr = (Object[])courses.toArray();
+			semester.add(fSemester);
+			Object[] arr1 = (Object[])semester.toArray();
+			request.setAttribute("faculty_courses", arr);
+			request.setAttribute("faculty_semester", arr1);
+			request.getRequestDispatcher("facultyAddCourse.jsp").forward(request, response);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
+	public static boolean clearCourses()throws ServletException, IOException {
+		try {
+//			String rem = request.getParameter("courses");
+//			 System.out.println("value: " + rem);
+		 System.out.println("SiteNav Performing clear operation !!");
+		 Faculty fac = new Faculty();
+		 fac.removeCourses(courses,semester);
+		 System.out.println("operation cleared !!");
+		 
+//	      retval = arrlist.size();
+//	      System.out.println("Now, list consists of "+ retval +" elements");
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+
+}
 }

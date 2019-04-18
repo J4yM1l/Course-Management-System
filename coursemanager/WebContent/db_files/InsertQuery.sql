@@ -40,3 +40,10 @@ select s.fname, f.fname, o.semester
 from student s, Faculty f, Course c, Enrolled e, Offered o
 where e.sid=s.sid and o.oid=e.oid and c.cid=o.cid and f.fid=o.fid and o.semester='fall' and c.cname='Computer Programming I' and o.year=2019
 */
+
+DELETE FROM Course where cid = 1;
+DELETE FROM Course where cid = 2;
+DELETE FROM Course where cid = 3;
+DELETE FROM Offered WHERE cid = 1;
+DELETE FROM Offered WHERE cid = 2;
+DELETE FROM Offered WHERE cid = 3;
