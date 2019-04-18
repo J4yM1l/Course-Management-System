@@ -26,6 +26,7 @@
 		}
 	%>
 <!--/head-->
+<%String fs = (String)request.getAttribute("faculty_courses");%>
 <body>
   <div class="container" id="main-table">
    
