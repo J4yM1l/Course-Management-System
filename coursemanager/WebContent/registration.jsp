@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+<%@ page import="java.util.*" %> 
     
 <!-- header -->
   <%@ include file="header_footer/header.txt"  %>
@@ -34,7 +34,7 @@
 			  <option>Summer I</option>
 			  <option >Summer II</option>  
 			</select><br/>
-		  <input type="number" class="form-control form-control-sm" placeholder="Enter Year" id="year">
+		  <input type="number" class="form-control form-control-sm" placeholder="Enter Year" value="<%=(request.getParameter("year")!=null)? request.getParameter("year"):"" %>" name ="year"id="year">
 		  <button type="submit" class="btn btn-primary">Submit</button>
 		</div>
 	</form><br/>
@@ -46,25 +46,38 @@
 	      </tr>
 	    </thead>
 	    <tbody>
+	    <% 
+	    	String[] data=(String[])request.getAttribute("offered");
+	    	if(data!=null){
+    		System.out.println(data[0]);
+	    	StringTokenizer token=new StringTokenizer("");
+
+	    	for(int i=0; i<data.length; i++){
+	    		System.out.println(data[i]);
+	    		if(data[i]==null)break;
+	    		token=new StringTokenizer(data[i],"&");
+	    	%>
 	      <tr>
 	        <td>
         		<div class="card">
 				  <div class=""style="display:inline">
 				    <label class="card-title font-weight-bold"> Name: </label>
-				    <label>Computer Programming I</label><br/>
+				    <label><%=token.nextToken() %></label><br/>
 				    <label class="card-title font-weight-bold"> Professor: </label>
-				    <label>Elva Jones</label><br/>
+				    <label><%=token.nextToken() %></label><br/>
 				   	<label class="card-title font-weight-bold"> Meet At: </label>
-				    <label>Computer Science Building</label><br/>
+				    <label><%=token.nextToken() %></label><br/>
 				    <label class="card-title font-weight-bold"> Room Number: </label>
-				    <label>#3103</label>
+				    <label><%=token.nextToken() %></label>
 				    <button type="button" class="btn btn-success btn float-right">Add</button>
 				  </div>
 				  
 				</div>
 	        </td>
 	      </tr>
-
+	     <%} }
+	     
+	     %>
 	    </tbody>
 	  </table>
 	</div>

@@ -119,6 +119,34 @@ public class Connect
         }
     	return data;
     }
+    public String[][] getAllFaculty() throws SQLException {
+    	
+    	String sql="select * from faculty";
+		stmt = connection.createStatement();
+        rs = stmt.executeQuery(sql);
+        String[][] data=new String[rs.getFetchSize()][2];
+        int index=0;
+        while(rs.next()) {
+        	data[index][0]=String.valueOf(rs.getInt(1));
+        	data[index][1]=rs.getString(2)+" "+ rs.getString(3)+" "+rs.getString(4);
+        	index++;
+        }
+    	return data;
+    }
+    public String[][] getAllOffers() throws SQLException {
+    	
+    	String sql="select * from offered";
+		stmt = connection.createStatement();
+        rs = stmt.executeQuery(sql);
+        String[][] data=new String[rs.getFetchSize()][2];
+        int index=0;
+        while(rs.next()) {
+        	data[index][0]=String.valueOf(rs.getInt(1));
+        	data[index][1]=String.valueOf(rs.getInt(2))+"&"+ String.valueOf(rs.getInt(3));
+        	index++;
+        }
+    	return data;
+    }
     public String[][] courseTakenInSpecificYear(String course, String semester, int year) throws SQLException {
     	String sql="select s.fname, s.lname, f.fname, f.lname " + 
     			"from student s, Faculty f, Course c, Enrolled e, Offered o" + 
@@ -138,17 +166,52 @@ public class Connect
     public String[] getAllOffers(String semester, int year)throws SQLException  {
     	String sql="select c.cid, c.cname, c.meets_at, c.room, f.lname " + 
     			"from Faculty f, Course c, Offered o" + 
-    			" where o.oid=e.oid and c.cid=o.cid and f.fid=o.fid and o.semester='"+semester.toLowerCase()+"' and o.year="+year+"";
+    			" where c.cid=o.cid and f.fid=o.fid and o.semester='"+semester.toLowerCase()+"' and o.year="+year+"";
 		stmt = connection.createStatement();
         rs = stmt.executeQuery(sql);
         String[] data=new String[rs.getFetchSize()];
         int index=0;
         while(rs.next()) {
-        	data[index]=String.valueOf(rs.getInt(0))+" "+ rs.getString(1)+" "+ rs.getString(2)+ " "+ rs.getString(3);
+
+        	data[index]=(rs.getString(2))+"&"+ rs.getString(5)+"&"+ rs.getString(3)+ "&"+ rs.getString(4);
         	index++;
         }
         System.out.println("Obtained Courses Taken");
     	return data;
+    }
+    
+    public boolean addClass(String cname, String meetAt, String rm) throws SQLException {
+    	System.out.println(cname);
+    	if(containsRecord(cname)==false) {
+        	String sql="insert into course(cname, meets_at, room)"
+        			+ "values('"+cname+"',"+"'"+meetAt+"',"+"'"+rm+"');";
+        
+    		stmt=connection.createStatement();
+    		stmt.execute(sql);
+    		return true;
+    	}
+    	return false;
+    }
+    
+    private boolean containsRecord(String cname) throws SQLException{
+    	String st="select * from course where cname='"+cname+"'";
+    	ResultSet rset;		
+    	stmt = connection.createStatement();
+        rset = stmt.executeQuery(st);
+        if(rset.next()==false) {
+        	return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean addOffer(int cid, int fid, String semester, int year) throws SQLException {
+    	String sql="insert into offered(cid, fid, semester, year)"
+    			+ "values("+cid+","+""+fid+","+"'"+semester+"',"+year+");";
+    
+		stmt=connection.createStatement();
+		stmt.execute(sql);
+		return true;
     }
 
     public void closeCon() throws Exception

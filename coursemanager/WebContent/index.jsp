@@ -8,9 +8,10 @@
   <link href="f_sources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="f_sources/css/business-frontpage.css" rel="stylesheet">
 </head>
-<body  style="background-color: #5e5e5e">
+<body  style="background-color: #5e5e5e; padding-top:0px;">
+<a style="float: right; " href="<%=request.getContextPath()%>/SiteNavigator?action=admin">Admin Login</a>
 
-<h1 class="card-title font-weight-bold card-text" style="text-align: center; color: #c7004c">CS COURSE MANAGEMENT SYSTEM</h1>
+<h1 class="card-title font-weight-bold card-text" style="text-align: center; color: #c7004c; padding-top: 50px;">CS COURSE MANAGEMENT SYSTEM</h1>
 
 <div style="margin-top: 100px;">
 	<div class="row" style="margin: auto; width:60%">
