@@ -31,7 +31,7 @@ public class SiteNavigator extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getParameter("action");
+		String action = request.getParameter("action");	//get action
 		switch (action) {
 		case "studentlogin":
 			request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -45,8 +45,11 @@ public class SiteNavigator extends HttpServlet {
 		case "register":
 			request.getRequestDispatcher("account_registration.jsp").forward(request, response);
 			break;
+		case "admin":
+			request.getRequestDispatcher("admin_login.jsp").forward(request, response);
+			break;
 		default:
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 			break;
 		}
 	}
@@ -160,22 +163,27 @@ public class SiteNavigator extends HttpServlet {
 			Connect connection=new Connect();
 			String username = request.getParameter("username");
 			String password = request.getParameter("password").toString();
+			String auth=request.getParameter("admin");
 			if(connection.validateUser(username, password, 1)) {
 				faculty=connection.getFacultyInfo();
 				System.out.println("Faculty info: " + faculty.toString());
 				connection.closeCon();
 				System.out.println("Faculty login successfull");
-				
+				//creating session and cookie
 				request.getSession().invalidate();
 				HttpSession newSession = request.getSession(true);
 			    newSession.setMaxInactiveInterval(300);
 			    newSession.setAttribute("username", username);
-			    
 			    Cookie cookie = new Cookie("username", username);;
 				response.addCookie(cookie);
 				student=connection.getStudentInfo();
 				request.setAttribute("faculty", faculty);
+				if(auth==null)
 				response.sendRedirect(request.getContextPath()+"/FacultySiteNavigator?action="+username+"&fnav=dashboard");
+				else
+				{
+					response.sendRedirect(request.getContextPath()+"/AdminSiteNavigator?action="+username+"&nav=dashboard");
+				}
 			}else {
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 				System.out.println("Faculty login failed");
