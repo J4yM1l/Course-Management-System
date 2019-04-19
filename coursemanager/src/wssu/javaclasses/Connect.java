@@ -19,9 +19,10 @@ import java.sql.*;
 public class Connect
 {
      // Declare the JDBC objects.
-     private Connection connection = null;
-     private Statement stmt = null;
-     private ResultSet rs = null;
+     private static Connection connection = null;
+     private static Statement stmt = null;
+     private static ResultSet rs = null;
+     private int s_pk;
 
     /**
      * Constructor for objects of class Connect
@@ -37,12 +38,13 @@ public class Connect
             System.out.println("Successfully connected to Database");
         }
     }
-    Student student=null;
-    Faculty faculty=null;
+    static Student student=null;
+    static Faculty faculty=null;
     @SuppressWarnings("static-access")
 	public boolean validateUser(String username, String password, int type) throws SQLException {
     	if(type==0) {
 	    	student=new Student(connection, username, password);
+	    	s_pk=student.getPK();
 	        return (student.validate());
         }
     	else {
@@ -52,10 +54,10 @@ public class Connect
     	}
     	return false;
     }
-    public Student getStudentInfo() {
+    public static  Student getStudentInfo() {
     	return student;
     }
-    public Faculty getFacultyInfo() {
+    public static Faculty getFacultyInfo() {
     	return faculty;
     }
     public void InsertToStudent(String fname, String mname, String lname, String major, String level, int byear, String username, String password) throws SQLException{
@@ -180,6 +182,24 @@ public class Connect
     	return data;
     }
     
+    public static String[] getAllOffer()throws SQLException  {
+    	String sql="select c.cid, c.cname, c.meets_at, c.room, f.lname, o.oid " + 
+    			"from Faculty f, Course c, Offered o" + 
+    			" where c.cid=o.cid and f.fid=o.fid";
+
+		stmt = connection.createStatement();
+        rs = stmt.executeQuery(sql);
+        String[] data=new String[rs.getFetchSize()];
+        int index=0;
+        while(rs.next()) {
+
+        	data[index]=String.valueOf(rs.getInt(1))+"&"+(rs.getString(2))+"&"+ rs.getString(5)+"&"+ rs.getString(3)+ "&"+ rs.getString(4)+"&"+ String.valueOf(rs.getInt(6));
+        	index++;
+        }
+        System.out.println("Obtained Courses Taken");
+    	return data;
+    }
+    
     public boolean addClass(String cname, String meetAt, String rm) throws SQLException {
     	System.out.println(cname);
     	if(containsRecord(cname)==false) {
@@ -214,10 +234,44 @@ public class Connect
 		return true;
     }
 
+    public boolean enrolling(int pk, int oid) throws SQLException {
+    	if(hasEnrolledInSameClass(pk, oid)==false) {
+	    	String sql="insert into enrolled(sid, oid) values("+pk+","+oid+");";
+			stmt=connection.createStatement();
+			stmt.execute(sql);
+			return true;
+    	}else {
+    		return false;
+    	}
+    	
+    }
+    public static int[] getClassID(int pk) throws SQLException {
+    	String sql="select o.oid from offered o, student s, enrolled e where e.sid=s.sid and e.oid=o.oid and e.sid="+pk+";";
+		stmt = connection.createStatement();
+        rs = stmt.executeQuery(sql);
+        int[] data=new int[rs.getFetchSize()];
+        int index=0;
+        while(rs.next()) {
+        	if(rs.getInt("oid")==0)break;
+        	data[index]=rs.getInt(1);
+        	index++;
+        }
+        System.out.println("Obtained Courses Taken");
+    	return data;
+    }
+    public boolean hasEnrolledInSameClass(int pk, int oid) throws SQLException {
+    	String sql="select s.sid, o.oid from offered o, student s, enrolled e where e.sid=s.sid and e.oid=o.oid and e.sid="+pk+" and o.oid="+oid+";";
+		stmt = connection.createStatement();
+        rs = stmt.executeQuery(sql);
+        if(rs.next()) {
+        if(rs.getInt(1)==pk && rs.getInt(2)==oid)return true;}
+        return false;
+    }
     public void closeCon() throws Exception
     {
         connection.close();
     }
 
+    
     
 } // End of Connect

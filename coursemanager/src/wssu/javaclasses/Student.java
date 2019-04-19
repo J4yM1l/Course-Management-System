@@ -31,6 +31,7 @@ public class Student {
 		String tusername=null, tpassword=null;
 		while(rs.next())
 		{
+			pk=rs.getInt(1);
 			tusername=rs.getString("username");
 			tpassword=rs.getString("password");
 		}
@@ -49,6 +50,10 @@ public class Student {
 		}catch(Exception e)	{}
 
 		return null;
+	}
+	public static int getPK() {
+		System.out.println("Primary Key is: "+pk);
+		return pk;
 	}
 
 }

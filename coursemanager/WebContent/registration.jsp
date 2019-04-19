@@ -4,6 +4,9 @@
     
 <!-- header -->
   <%@ include file="header_footer/header.txt"  %>
+  <script>
+  	//function disable(id)
+  </script>
    <%
   String username = null, sessionID = null;
 		Cookie[] cookies = request.getCookies();
@@ -50,8 +53,10 @@
 
 	    	String[] data=(String[])request.getAttribute("offered");
 	    	String c;
+	    	int o;
+	    	boolean found=false;
+	    	int[] enrollID=(int[])request.getAttribute("enrollClasses");
 	    	if(data!=null){
-    		System.out.println(data[0]);
 	    	StringTokenizer token=new StringTokenizer("");
 
 	    	for(int i=0; i<data.length; i++){
@@ -62,6 +67,7 @@
 	    	%>
 	      <tr>
 	        <td>
+	        <form action="<%=request.getContextPath()%>/StudentSiteNavigator?action=enroll" method="post">
         		<div class="card">
 				  <div class=""style="display:inline">
 				  	<label class="card-title font-weight-bold"> ID#: </label>
@@ -74,11 +80,26 @@
 				    <label><%=token.nextToken() %></label><br/>
 				    <label class="card-title font-weight-bold"> Room Number: </label>
 				    <label><%=token.nextToken() %></label>
-				    <input type="hidden" name="oid"></input>
-				    <button type="submit" class="btn btn-success btn float-right" onclick=""></button>
+				    <% o=Integer.parseInt(token.nextToken());%>
+				    <input type="hidden" name="oid" value="<%=o%>"></input>
+				    <%
+				    found=false;
+				    for(int e=0; e<enrollID.length; e++){ 
+				    	System.out.println(enrollID[e]+" "+o);
+				    	if(enrollID[e]==o){
+				    		found=true;
+				    		break;}}
+				    if(found==false){
+	    			%>
+	    			<button type="submit" class="btn btn-primary float-right" onclick="">Enroll</button>
+	    			<%}else{
+	    			%>
+	    			<label class="float-right" onclick="">You are already Enrolled</label>
+	    			<%} %>
 				  </div>
 				  
 				</div>
+			</form>
 	        </td>
 	      </tr>
 	     <%} }

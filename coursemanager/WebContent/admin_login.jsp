@@ -19,9 +19,9 @@
   
 </head>
 
-<body style="background-color: #5e5e5e">
+<body style="background-color: #5e5e5e;padding-top: 0px">
     <!-- Page Content -->
-    
+        <h1 class="card-title font-weight-bold card-text" style="text-align: center; color: #c7004c; padding-top: 50px;">CS COURSE MANAGEMENT SYSTEM</h1>
  <div class="card text-center w-50 p-3 row align-items-center" style="height: 400px; background-color:#f6f5f5 ;margin: auto; outline: #c7004c solid 10px">
   <div id="student">
   <div class="card-body">
