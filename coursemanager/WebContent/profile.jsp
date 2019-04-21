@@ -85,7 +85,7 @@
 	    	<tbody>
 	    	<tr>
 	    	<td><label class="font-weight-bold" for="">First: </label></td>
-	    	<td><input  class="text-uppercase form-control" type="text" name="fname"value="<%=infor[0] %>"  disabled></td>
+	    	<td><input  class="text-uppercase form-control" type="text" name="fname"value="<%=infor[0] %>"  disabled required></td>
 	    	</tr>
 	    	<tr>
 	    	<td><label class="font-weight-bold" for="">Middle: </label></td>
@@ -94,19 +94,19 @@
 
 	    	<tr>
 	    	<td><label class="font-weight-bold" for="">Last: </label></td>
-	    	<td><input class="text-uppercase form-control" type="text" name="lname" value="<%=infor[2] %>" disabled></td>
+	    	<td><input class="text-uppercase form-control" type="text" name="lname" value="<%=infor[2] %>" disabled required></td>
 	    	</tr>
 	    	<tr>
 	    	<td><label class="font-weight-bold" for="">Major: </label></td>
-	    	<td><input class="text-uppercase form-control" type="text" name="major" value="<%=infor[3] %>" disabled></td>
+	    	<td><input class="text-uppercase form-control" type="text" name="major" value="<%=infor[3] %>" disabled required></td>
 	    	</tr>
 			<tr>
 	    	<td><label class="font-weight-bold" for="">Classification: </label></td>
-	    	<td><input class="text-uppercase form-control" type="text" name="level" value="<%=infor[4] %>" disabled></td>
+	    	<td><input class="text-uppercase form-control" type="text" name="level" value="<%=infor[4] %>" disabled required></td>
 	    	</tr>
 	    	<tr>
 	    	<td><label class="font-weight-bold" for="">Birth Year: </label></td>
-	    	<td><input class="text-uppercase form-control" type="number" name="byear" value="<%=infor[5] %>" disabled></td>
+	    	<td><input class="text-uppercase form-control" type="number" name="byear" value="<%=infor[5] %>" disabled required></td>
 	    	</tr>
 	    	<tr>
 	    	<tr><td><a onclick="edit()"><button type="button" name="edit" style="display: block" class="btn btn-primary text-uppercase form-control" >edit Information</button></a></td></tr>

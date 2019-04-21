@@ -35,7 +35,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active" id=n0>
+          <li class="nav-item" id=n0>
             <a class="nav-link" href="<%=request.getContextPath()%>/AdminSiteNavigator?nav=dashboard">Dashboard 
               <span class="sr-only">(current)</span>
             </a>
@@ -43,7 +43,7 @@
           <li class="nav-item " id="n1">
             <a class="nav-link" href="<%=request.getContextPath()%>/AdminSiteNavigator?nav=createclass">Create Class</a>
           </li>
-          <li class="nav-item"  id="n4">
+          <li class="nav-item active"  id="n4">
             <a class="nav-link" href="<%=request.getContextPath()%>/AdminSiteNavigator?nav=offer">Add Offer</a>
           </li>
           <li class="nav-item">
@@ -55,9 +55,9 @@
   </nav>
 
 <!-- Header -->
-  <header class=" py-5 mb-5" style="background-color: #8f1537;">
-    <div class="container h-100">
-      <div class="row h-100 align-items-center">
+  <header class="mb-5" style="background-color: #8f1537;">
+    <div class="container h-70">
+      <div class="row h-70 align-items-center">
         <div class="col-lg-12">
           <h1 class="display-4 text-white mt-5 mb-2">Computer Science Course Management System</h1>
           <p class="lead mb-5 text-white-50">Our Computer Science program is accredited by the Computing Accreditation Commission of ABET, <a href="http://www.abet.org.">http://www.abet.org.</a>
