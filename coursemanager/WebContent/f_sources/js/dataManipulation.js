@@ -117,4 +117,16 @@
 		}
 
   	}
+  	function edit(){
+  		document.getElementName("fname").disabled=false;
+  		document.getElementName("mname").disabled=false;
+  		document.getElementName("lname").disabled=false;
+  		document.getElementName("major").disabled=false;
+  		document.getElementName("level").disabled=false;
+  		document.getElementName("byear").disabled=false;
+  		document.getElementName("edit").style.display = "none";
+  		document.getElementName("update").style.display = "block";
+
+  		return;
+  	}
   	

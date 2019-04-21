@@ -42,15 +42,13 @@
 		</div>
 	</form><br/>
     
-	    <table class="table table-hover ">
-	    <thead class="thead-light">
-	      <tr>
-	        <th>Available Courses to Add</th>
-	      </tr>
-	    </thead>
-	    <tbody>
+	<div class="row">
+	<div class="card" style="width: 100%;">
+	  <div class="card-header h2">
+	   Classes Offered
+	  </div>
+	  <ul class="list-group list-group-flush">
 	    <% 
-
 	    	String[] data=(String[])request.getAttribute("offered");
 	    	String c;
 	    	int o;
@@ -60,18 +58,17 @@
 	    	StringTokenizer token=new StringTokenizer("");
 
 	    	for(int i=0; i<data.length; i++){
-	    		System.out.println(data[i]);
 	    		if(data[i]==null)break;
 	    		token=new StringTokenizer(data[i],"&");
 	    		c=token.nextToken(); 
 	    	%>
-	      <tr>
-	        <td>
+	    <li class="list-group-item">
+	    	<div class="card" style="width: 100%;">
+			  <div class="card-body">
 	        <form action="<%=request.getContextPath()%>/StudentSiteNavigator?action=enroll" method="post">
-        		<div class="card">
 				  <div class=""style="display:inline">
 				  	<label class="card-title font-weight-bold"> ID#: </label>
-				    <label name="<%=c%>"><%=c%></label><br/>
+				    <label > <%=c%></label><br/>
 				    <label class="card-title font-weight-bold"> Name: </label>
 				    <label><%=token.nextToken() %></label><br/>
 				    <label class="card-title font-weight-bold"> Professor: </label>
@@ -85,28 +82,32 @@
 				    <%
 				    found=false;
 				    for(int e=0; e<enrollID.length; e++){ 
-				    	System.out.println(enrollID[e]+" "+o);
 				    	if(enrollID[e]==o){
 				    		found=true;
 				    		break;}}
 				    if(found==false){
 	    			%>
-	    			<button type="submit" class="btn btn-primary float-right" onclick="">Enroll</button>
+	    			<button type="submit" class="btn btn-primary float-right" onclick="">ENROLL</button>
 	    			<%}else{
 	    			%>
-	    			<label class="float-right" onclick="">You are already Enrolled</label>
+	    			<label class="float-right text-danger" >You are already Enrolled</label>
+	    			
+			    		<div class="alert alert-success" role="alert">
+						  You have successfully added this class to your schedule
+						</div>
 	    			<%} %>
-				  </div>
 				  
 				</div>
 			</form>
-	        </td>
-	      </tr>
+			  </div>
+			</div>
+	    </li>
 	     <%} }
 	     
 	     %>
-	    </tbody>
-	  </table>
+	</ul>
+	</div>
+	</div>
 	</div>
   <!-- footer -->
   <%@ include file="header_footer/footer.txt"  %>

@@ -32,8 +32,8 @@ public class StudentSiteNavigator extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("static-access")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String action =request.getParameter("action");
 		System.out.println("Getting request parameter: " + action);
 		String nav=request.getParameter("nav");
@@ -44,33 +44,61 @@ public class StudentSiteNavigator extends HttpServlet {
 			request.setAttribute("enrollClasses", (request.getAttribute("enrollClasses")!=null)? request.getAttribute("enrollClasses"):Connect.getClassID(Connect.getStudentInfo().getPK()));
 			con.closeCon();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Connect con;
 		switch(nav){
 			case "dashboard":
 				try {
-				Connect con=new Connect();
+				con=new Connect();
 				request.setAttribute("allCourses", con.getAllCourses());
 				con.closeCon();
 				}catch(Exception e) {}
+				request.setAttribute("name", "dashboard");
 				request.getRequestDispatcher("studenthome.jsp").forward(request, response);
-				break;
-			case "grades":
-				request.getRequestDispatcher("grades.jsp").forward(request, response);
 				break;
 				
 			case "profile":
+				if(request.getParameter("updatefailed")!=null && request.getParameter("updatefailed").equals("true") ) {
+					request.setAttribute("updatefailed", "true");
+				}else if(request.getParameter("updatefailed")!=null && request.getParameter("updatefailed").equals("false") ) {
+					request.setAttribute("updatefailed", "false");
+				}else if(request.getParameter("updated")!=null && request.getParameter("updated").equals("true") ) {
+					request.setAttribute("updated", "true");
+				}
+				getUserProfileInfor(request, response);
+				request.setAttribute("name", "profile");
 				request.getRequestDispatcher("profile.jsp").forward(request, response);
 				break;
 			case "registration":
-				//request.setAttribute("student", student);
+				request.setAttribute("name", "registration");
 				request.getRequestDispatcher("registration.jsp").forward(request, response);
 				break;
 			case "student_schedule":
+				
+				try {
+					con=new Connect();
+					request.setAttribute("offered", Connect.getAllOffer());
+					request.setAttribute("enrollClasses", Connect.getClassID(Connect.getStudentInfo().getPK()));
+					con.closeCon();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				request.setAttribute("name", "student_schedule");
+				request.getRequestDispatcher("student_schedule.jsp").forward(request, response);
+				break;
+				
+			case "drop":
+				try {
+					dropClass(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				request.setAttribute("name", "student_schedule");
 				request.getRequestDispatcher("student_schedule.jsp").forward(request, response);
 				break;
 		}
@@ -80,7 +108,6 @@ public class StudentSiteNavigator extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String action=request.getParameter("action");
 		switch(action) {
 			case "taken":
@@ -93,10 +120,24 @@ public class StudentSiteNavigator extends HttpServlet {
 			try {
 				enrollAClass(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 				break;
+			case "profile":
+				if(request.getParameter("infor")!=null && request.getParameter("infor").equals("userinfor")) {
+					try {
+						updateUserInformation(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else if(request.getParameter("infor")!=null && request.getParameter("infor").equals("updatepassword")) {
+					try {
+						updatePassword(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+					break;
 		}
 	}
 	
@@ -110,6 +151,7 @@ public class StudentSiteNavigator extends HttpServlet {
 			request.setAttribute("taken", con.courseTakenInSpecificYear(course, semester, year));
 			request.setAttribute("offered", Connect.getAllOffer());
 			con.closeCon();
+			request.setAttribute("name", "dashboard");
 			request.getRequestDispatcher("studenthome.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -117,7 +159,7 @@ public class StudentSiteNavigator extends HttpServlet {
 		}
 		
 	}
-	
+	@SuppressWarnings("static-access")
 	private void getAllCoursess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
 			String semester=request.getParameter("semester");
@@ -126,29 +168,77 @@ public class StudentSiteNavigator extends HttpServlet {
 			request.setAttribute("offered", con.getAllOffers(semester, year));
 			request.setAttribute("enrollClasses", Connect.getClassID(Connect.getStudentInfo().getPK()));
 			con.closeCon();
+			request.setAttribute("name", "registration");
 			request.getRequestDispatcher("registration.jsp").forward(request, response);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	@SuppressWarnings("static-access")
 	private void enrollAClass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-		//int cid=Integer.parseInt(request.getParameter("cid"));
-		System.out.println(request.getParameter("username"));
 		int oid=Integer.parseInt(request.getParameter("oid"));
 		Connect con=new Connect();
 		if(con.enrolling(Connect.getStudentInfo().getPK(), oid)){
 			request.setAttribute("offered", Connect.getAllOffer());
 			request.setAttribute("enrollClasses", Connect.getClassID(Connect.getStudentInfo().getPK()));
-			
+			request.setAttribute("name", "registration");
+
 			request.getRequestDispatcher("registration.jsp").forward(request, response);
 		}else {
 			request.setAttribute("offered", Connect.getAllOffer());
 			request.setAttribute("enrollClasses", Connect.getClassID(Connect.getStudentInfo().getPK()));
+			request.setAttribute("name", "registration");
+
 			request.getRequestDispatcher("registration.jsp").forward(request, response);
 		}
 		con.closeCon();
 		
 	}
+	@SuppressWarnings("static-access")
+	private void dropClass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
+		Connect con=new Connect();
+		int sid=con.getStudentInfo().getPK();
+		int oid=Integer.parseInt(request.getParameter("oid"));
+		con.dropClass(sid, oid);
+		request.setAttribute("offered", Connect.getAllOffer());
+		request.setAttribute("enrollClasses", Connect.getClassID(Connect.getStudentInfo().getPK()));
+		con.closeCon();
+	}
+	private void getUserProfileInfor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		request.setAttribute("ProfileInfor", Student.getInforArray());	
+	}
+	private void updateUserInformation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception{
+		Connect con=new Connect();
+		String[] infor=new String[6];
+		System.out.println(request.getParameter("fname"));
+		infor[0]=request.getParameter("fname");
+		infor[1]=request.getParameter("mname");
+		infor[2]=request.getParameter("lname");
+		infor[3]=request.getParameter("major");
+		infor[4]=request.getParameter("level");
+		infor[5]=request.getParameter("byear");
+		Connect.updateStudentProfileInfor(infor);
+		con.closeCon();
+		con=new Connect();
+		Connect.getStudentInfo().initInfor(Connect.connection);
+		con.closeCon();
+		response.sendRedirect(request.getContextPath()+"/StudentSiteNavigator?nav=profile&updated=true");
+		}
+	private void updatePassword (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception{
+		String pwd1=request.getParameter("p1").trim();
+		String pwd2=request.getParameter("p2").trim();
+		if(pwd1.equals(pwd2)) {
+			Connect con =new Connect();
+			Connect.updatePassword(pwd1);
+			Connect.getStudentInfo().initInfor(Connect.connection);
+			response.sendRedirect(request.getContextPath()+"/StudentSiteNavigator?nav=profile&updatefailed=false");
+		}else
+		{
+			//request.setAttribute("updatefailed", "true");
+			response.sendRedirect(request.getContextPath()+"/StudentSiteNavigator?nav=profile&updatefailed=true");
 
+		}
+
+	}
 }

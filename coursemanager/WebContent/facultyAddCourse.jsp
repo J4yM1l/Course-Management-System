@@ -62,7 +62,7 @@
 				<br><br>
 				<br><br>
 				<br><br>
-				<buton type="button"  class="btn btn-primary">Clear</buton>
+				<button type="button"  class="btn btn-primary">Clear</button>
 <!--   		  </div> -->
 		</div>
 		  

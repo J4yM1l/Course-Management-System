@@ -2,7 +2,6 @@ package wssu.javaclasses;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,14 +10,17 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 
 public class Faculty {
+	@SuppressWarnings("unused")
 	private String fName, mName, lName;
+	@SuppressWarnings("unused")
 	private String major, byear, level, department;
 	private String username, password;
+	@SuppressWarnings("unused")
 	private int pk;
 	private Connection connection=null;
     private Statement stmt = null;
     private ResultSet rs = null;
-    
+    @SuppressWarnings("unused")
     private String course;
     
 	public Faculty(Connection connect, String username, String passord) throws SQLException {
@@ -63,7 +65,6 @@ public class Faculty {
 //	      retval = arrlist.size();
 //	      System.out.println("Now, list consists of "+ retval +" elements");
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	

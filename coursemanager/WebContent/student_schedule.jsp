@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+    <%@ page import="java.util.*" %>
     
 <!-- header -->
   <%@ include file="header_footer/header.txt"  %>
@@ -27,90 +27,58 @@
   <div class="container">
   <!-- form -->
 	<div class="row">
-		<div class="col-md-6">
-			<div style="border-right: 5px solid; border-left: 5px solid;border-right-width: thin; border-left-width: thin;">
-				<div style="margin-left: 10px; margin-right:10px;">
-				<h5 ><b>CSC 1310 Computer Program. I</b></h5>
-				<table style="width:100%;">
-				<tr>
-					<th>
-						Assigned Instructor:
-					</th>
-					<th>
-						Mustafa Atay
-					</th>
-				</tr>
-				<tr>
-					<th>
-						Grade Mode:
-					</th>
-					<th>
-						Standard A, B, C, D, F, I
-					</th>
-				</tr>
-				<tr>
-					<th>
-						Time:
-					</th>
-					<th>
-						9:30 am - 10:45 
-					</th>
-				</tr>
-				<tr>
-					<th>
-						Day:
-					</th>
-					<th>
-						Monday; Wednesday
-					</th>
-				</tr>
-				</table>
-				</div>
+	<div class="card" style="width: 100%;">
+	  <div class="card-header h2">
+	    Active Registered Classes
+	  </div>
+	  <ul class="list-group list-group-flush">
+	  <%
+
+	  	String[] data=(String[])request.getAttribute("offered");
+	  	String cID, cName, professor, meet_at, rm, oid;
+	  	int o;
+	  	boolean found=false;
+	  	int[] enrollID=(int[])request.getAttribute("enrollClasses");
+	  	if(data!=null){
+	  	StringTokenizer token=new StringTokenizer("");
+	
+	  	for(int i=0; i<data.length; i++){
+	  		if(data[i]==null)break;
+	  		token=new StringTokenizer(data[i],"&");
+	  		cID=token.nextToken();
+	  		cName=token.nextToken(); 
+	  		professor=token.nextToken(); 
+	  		meet_at=token.nextToken(); 
+	  		rm=token.nextToken(); 
+	  		oid=token.nextToken(); 
+
+		    found=false;
+		    for(int e=0; e<enrollID.length; e++){ 
+		    	if(enrollID[e]==Integer.parseInt(oid)){
+		    		found=true;
+		    		break;}}
+		    if(found==true){
+  	%>
+	    <li class="list-group-item">
+	    	<div class="card" style="width: 100%;">
+			  <div class="card-body">
+			    <label class="card-title font-weight-bold">Course Name: </label>
+			    <label > <%=cName%></label><br/>
+			    <label class="card-title font-weight-bold">Course ID: </label>
+			    <label><%=cID%></label><br/>
+			    <label class="card-title font-weight-bold">Professor: </label>
+			    <label><%=professor %></label><br/>
+			   	<label class="card-title font-weight-bold">Meeting Location: </label>
+			    <label><%=meet_at%></label><br/>
+			    <label class="card-title font-weight-bold"> Meeting Room: </label>
+			    <label>#<%=rm %></label><br/>    
+			    <a class="float-right" href="<%=request.getContextPath()%>/StudentSiteNavigator?nav=drop&oid=<%=oid%>"><button type="submit" class="btn btn-primary float-left">DROP</button></a>
+			  </div>
 			</div>
-		</div>
-		
-		<!-- Second course -->
-		<div class="col-md-6">
-			<div style="border-right: 5px solid; border-left: 5px solid;border-right-width: thin; border-left-width: thin;">
-				<div style="margin-left: 10px; margin-right:10px;">
-				<h5 ><b>CSC 1310 Computer Program. I</b></h5>
-				<table style="width:100%;">
-				<tr>
-					<th>
-						Assigned Instructor:
-					</th>
-					<th>
-						Mustafa Atay
-					</th>
-				</tr>
-				<tr>
-					<th>
-						Grade Mode:
-					</th>
-					<th>
-						Standard A, B, C, D, F, I
-					</th>
-				</tr>
-				<tr>
-					<th>
-						Time:
-					</th>
-					<th>
-						9:30 am - 10:45 
-					</th>
-				</tr>
-				<tr>
-					<th>
-						Day:
-					</th>
-					<th>
-						Monday; Wednesday
-					</th>
-				</tr>
-				</table>
-				</div>
-			</div>
-		</div>
+	    </li>
+	    <%}}} %>
+	  </ul>
+	</div>
 	</div>
   </div>
   

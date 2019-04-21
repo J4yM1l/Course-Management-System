@@ -17,10 +17,10 @@
 	<div class="row" style="margin: auto; width:60%">
 	  <div class="col-*-* " style=" margin: auto;">
 	  	<a href="<%=request.getContextPath()%>/SiteNavigator?action=studentlogin">
-			<div class="card" style="width: 18rem;">
+			<div class="card" style="width:18rem">
 			  <img src="f_sources/images/student.png" class="img-circle" alt="Student Login">
 			  <div class="card-body">
-			    <h3 class="card-title font-weight-bold card-text" style="text-align: center"o">STUDENT LOGIN</h3>
+			    <h3 class="card-title font-weight-bold card-text" style="text-align: center">STUDENT LOGIN</h3>
 			  </div>
 			</div>
 			</a>
@@ -28,7 +28,7 @@
 	  
 	 <div class="col-*-*" style="margin: auto;">
 	  	<a href="<%=request.getContextPath()%>/SiteNavigator?action=facultylogin">
-			<div class="card" style="width: 18rem; ">
+			<div style="width: 18rem; " class="card" >
 			  <img src="f_sources/images/faculty.png" class="img-circle" alt="Faculty Login" style="height: 16rem">
 			  <div class="card-body">
 			   <h3 class="card-title font-weight-bold card-text" style="text-align: center">FACULTY LOGIN</h3>

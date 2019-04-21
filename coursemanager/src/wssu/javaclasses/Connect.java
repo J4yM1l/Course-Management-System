@@ -19,10 +19,11 @@ import java.sql.*;
 public class Connect
 {
      // Declare the JDBC objects.
-     private static Connection connection = null;
+     public static Connection connection = null;
      private static Statement stmt = null;
      private static ResultSet rs = null;
-     private int s_pk;
+     @SuppressWarnings("unused")
+	private int s_pk;
 
     /**
      * Constructor for objects of class Connect
@@ -42,17 +43,20 @@ public class Connect
     static Faculty faculty=null;
     @SuppressWarnings("static-access")
 	public boolean validateUser(String username, String password, int type) throws SQLException {
+    	boolean isRegistered=false;
     	if(type==0) {
 	    	student=new Student(connection, username, password);
+	    	isRegistered=(student.validate());
 	    	s_pk=student.getPK();
-	        return (student.validate());
+	    	student.initInfor(connection);
+	    	
+	        return isRegistered;
         }
     	else {
     		faculty=new Faculty(connection, username, password);
-            if(faculty.validate())
-            	return true;
+    		isRegistered=faculty.validate();
+            	return isRegistered;
     	}
-    	return false;
     }
     public static  Student getStudentInfo() {
     	return student;
@@ -166,7 +170,7 @@ public class Connect
     	return data;
     }
     public String[] getAllOffers(String semester, int year)throws SQLException  {
-    	String sql="select c.cid, c.cname, c.meets_at, c.room, f.lname, o.oid " + 
+    	String sql="select c.cid, c.cname, c.meets_at, c.room, f.fname, f.mname, f.lname, o.oid " + 
     			"from Faculty f, Course c, Offered o" + 
     			" where c.cid=o.cid and f.fid=o.fid and o.semester='"+semester.toLowerCase()+"' and o.year="+year+"";
 		stmt = connection.createStatement();
@@ -175,7 +179,7 @@ public class Connect
         int index=0;
         while(rs.next()) {
 
-        	data[index]=String.valueOf(rs.getInt(1))+"&"+(rs.getString(2))+"&"+ rs.getString(5)+"&"+ rs.getString(3)+ "&"+ rs.getString(4)+"&"+ String.valueOf(rs.getInt(6));
+        	data[index]=String.valueOf(rs.getInt(1))+"&"+(rs.getString(2))+"&"+ rs.getString(5)+" "+rs.getString(6)+" "+rs.getString(7)+"&"+ rs.getString(3)+ "&"+ rs.getString(4)+"&"+ String.valueOf(rs.getInt(8));
         	index++;
         }
         System.out.println("Obtained Courses Taken");
@@ -183,7 +187,7 @@ public class Connect
     }
     
     public static String[] getAllOffer()throws SQLException  {
-    	String sql="select c.cid, c.cname, c.meets_at, c.room, f.lname, o.oid " + 
+    	String sql="select c.cid, c.cname, c.meets_at, c.room, f.fname, f.mname, f.lname, o.oid " + 
     			"from Faculty f, Course c, Offered o" + 
     			" where c.cid=o.cid and f.fid=o.fid";
 
@@ -193,8 +197,7 @@ public class Connect
         int index=0;
         while(rs.next()) {
 
-        	data[index]=String.valueOf(rs.getInt(1))+"&"+(rs.getString(2))+"&"+ rs.getString(5)+"&"+ rs.getString(3)+ "&"+ rs.getString(4)+"&"+ String.valueOf(rs.getInt(6));
-        	index++;
+        	data[index]=String.valueOf(rs.getInt(1))+"&"+(rs.getString(2))+"&"+ rs.getString(5)+" "+rs.getString(6)+" "+rs.getString(7)+"&"+ rs.getString(3)+ "&"+ rs.getString(4)+"&"+ String.valueOf(rs.getInt(8));        	index++;
         }
         System.out.println("Obtained Courses Taken");
     	return data;
@@ -267,6 +270,23 @@ public class Connect
         if(rs.getInt(1)==pk && rs.getInt(2)==oid)return true;}
         return false;
     }
+    
+    public static void dropClass(int sid, int oid) throws SQLException {
+       	CallableStatement cstmt=connection.prepareCall("{call dropAClass("+sid+", "+oid+")}");
+       	cstmt.executeUpdate();
+    }
+    
+	public static void updateStudentProfileInfor(String[] infor) throws NumberFormatException, SQLException {
+		int year=Integer.parseInt(infor[5]);
+		
+       	CallableStatement cstmt=connection.prepareCall("{call UpdateUserInfor("+getStudentInfo().getPK()+", '"+infor[0]+"' , '"+infor[1]+"', "
+       			+ "'"+infor[2]+"', '"+infor[3]+"', '"+infor[4]+"', "+year+")}");
+       	cstmt.executeUpdate();
+	}
+	public static void updatePassword(String password) throws SQLException {
+       	CallableStatement cstmt=connection.prepareCall("{call UpdateUserPassword("+getStudentInfo().getPK()+", '"+password+"')}");
+       	cstmt.executeUpdate();
+	}
     public void closeCon() throws Exception
     {
         connection.close();

@@ -26,7 +26,6 @@ public class SiteNavigator extends HttpServlet {
      */
     public SiteNavigator() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -84,7 +83,6 @@ public class SiteNavigator extends HttpServlet {
 
 	}
 	private void CreateFacultyAccount(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		String fname=request.getParameter("f_firstname");
 		String mname=request.getParameter("f_middlename");
 		String lname=request.getParameter("f_lastname");
@@ -156,6 +154,7 @@ public class SiteNavigator extends HttpServlet {
 		}catch(EOFException e) {}
 
 	}
+	@SuppressWarnings("static-access")
 	private void FacultyAuthenticate(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		try {

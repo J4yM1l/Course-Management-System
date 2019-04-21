@@ -27,14 +27,12 @@ public class FacultySiteNavigator extends HttpServlet {
      */
     public FacultySiteNavigator() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		 action =request.getParameter("action");
 		 System.out.println("Get request action parameter: " + action);
@@ -76,7 +74,6 @@ public class FacultySiteNavigator extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String action=request.getParameter("action");
 		System.out.println("post request action " + action);
 		String button=request.getParameter("remove");
@@ -88,6 +85,7 @@ public class FacultySiteNavigator extends HttpServlet {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void getAllCoursesTaken(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
 			String course=request.getParameter("course");
@@ -99,7 +97,6 @@ public class FacultySiteNavigator extends HttpServlet {
 			con.closeCon();
 			request.getRequestDispatcher("studenthome.jsp").forward(request, response);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -121,7 +118,6 @@ public class FacultySiteNavigator extends HttpServlet {
 			request.setAttribute("faculty_semester", arr1);
 			request.getRequestDispatcher("facultyAddCourse.jsp").forward(request, response);
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -139,7 +135,6 @@ public class FacultySiteNavigator extends HttpServlet {
 //	      retval = arrlist.size();
 //	      System.out.println("Now, list consists of "+ retval +" elements");
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return true;
