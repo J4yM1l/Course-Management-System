@@ -7,10 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Student {
-	
-	@SuppressWarnings("unused")
-	private static String fName, mName, lName;
-	@SuppressWarnings("unused")
+	private static String fName, mName, lName;	//
 	private static String major, byear, level;
 	private static String username;
 	private static String password;
@@ -30,7 +27,7 @@ public class Student {
 		stmt = connection.createStatement();
         rs = stmt.executeQuery(sql);
 	}
-	
+	//Validates the current student username and password
 	public static boolean validate() throws SQLException{
 		if(username.equals("") || password.equals("")) return false;
 		String tusername=null, tpassword=null;
@@ -57,6 +54,7 @@ public class Student {
 
 		return null;
 	}
+	//Retrieves the current student information and store them in variables 
 	public static  void initInfor(Connection con) throws SQLException {
 		connection=con;
 		String sql="select * from student where sid="+pk;
@@ -107,7 +105,7 @@ public class Student {
 		return byear;
 	}
 
-
+	//Returns the current student information 
 	public static String[] getInforArray() {
 		String[] infor=new String[8];
 		infor[0]=fName;
@@ -122,6 +120,7 @@ public class Student {
 		return infor;
 		
 	}
+	//Returns the primary key of the current student
 	public static int getPK() {
 		System.out.println("Primary Key is: "+pk);
 		return pk;
