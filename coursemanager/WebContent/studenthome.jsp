@@ -4,11 +4,11 @@
     
 <!-- header -->
   <%@ include file="header_footer/header.txt"  %>
-    <script src="f_sources/js/dataManipulation.js"></script>
   
  <%
   String username = null, sessionID = null;
 		Cookie[] cookies = request.getCookies();
+		//check for the current user session and cookie; if availabled, it loads this page else it redirect to the index page
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("username")) {
@@ -64,7 +64,7 @@
 					<select class="form-control form-control-sm" name="course">
 					  <option selected>Select Course</option>
 					  <%String[][] data=(String[][]) request.getAttribute("allCourses");
-					  	if(data!=null){
+					  	if(data!=null){	
 					  	for(int i=0; i<data.length; i++){
 					  		if(data[i][1]==null){break;}%>
 					  		<option> <%=data[i][1]%> </option><%
