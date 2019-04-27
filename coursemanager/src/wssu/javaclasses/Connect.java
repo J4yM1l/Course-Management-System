@@ -1,6 +1,7 @@
 package wssu.javaclasses;
 
 import java.sql.*;
+import java.util.StringTokenizer;
 /* 
  * You can donwload MS SQL Server JDBC dirver at 
  * http://www.microsoft.com/downloads/en/details.aspx?FamilyID=a737000d-68d0-4531-b65d-da0f2a735707&displaylang=en
@@ -23,7 +24,7 @@ public class Connect
      private static Statement stmt = null;
      private static ResultSet rs = null;
      @SuppressWarnings("unused")
-	private int s_pk;
+	private  static int s_pk;
 
     /**
      * Constructor for objects of class Connect
@@ -39,8 +40,8 @@ public class Connect
             System.out.println("Successfully connected to Database");
         }
     }
-    static Student student=null;
-    static Faculty faculty=null;
+     static Student student=null;
+      static Faculty faculty=null;
     @SuppressWarnings("static-access")
 	public boolean validateUser(String username, String password, int type) throws SQLException {
     	boolean isRegistered=false;
@@ -58,7 +59,7 @@ public class Connect
             	return isRegistered;
     	}
     }
-    public static  Student getStudentInfo() {
+    public static Student getStudentInfo() {
     	return student;
     }
     public static Faculty getFacultyInfo() {
@@ -150,6 +151,7 @@ public class Connect
         	data[index][0]=String.valueOf(rs.getInt(1));
         	data[index][1]=String.valueOf(rs.getInt(2))+"&"+ String.valueOf(rs.getInt(3));
         	index++;
+        	//+"&"+ String.valueOf(rs.getInt(3)+"&"+ rs.getString(4))
         }
     	return data;
     }
@@ -286,6 +288,34 @@ public class Connect
 	public static void updatePassword(String password) throws SQLException {
        	CallableStatement cstmt=connection.prepareCall("{call UpdateUserPassword("+getStudentInfo().getPK()+", '"+password+"')}");
        	cstmt.executeUpdate();
+	}
+	
+	public String [][] assignedFacultyCourses(String sem, int yr) throws SQLException {
+		
+		String sql="select c.cid, c.cname, c.meets_at, c.room " + 
+    			"from Faculty f, Course c, Offered o" + 
+    			" where c.cid=o.cid and f.fid=o.fid and o.semester='"+sem.toLowerCase()+"' and o.year="+yr+"";
+		stmt = connection.createStatement();
+        rs = stmt.executeQuery(sql);
+        String[][] facultyCourseoffered = null;
+        int index=0;
+        int col = 0;
+        while(rs.next()) {
+        	String data =String.valueOf(rs.getInt(1))+","+(rs.getString(2));//+"&"+ rs.getString(5)+" "+rs.getString(6)+" "+rs.getString(7)+"&"+ rs.getString(3)+ "&"+ rs.getString(4)+"&"+ String.valueOf(rs.getInt(8));
+        	StringTokenizer token = new StringTokenizer(data, ",");
+        	int sizeToken = token.countTokens();
+        	 facultyCourseoffered=new String[rs.getFetchSize()][sizeToken];
+        	 while (token.hasMoreTokens()) { 
+        		 facultyCourseoffered[index][col] = token.nextToken();
+		         System.out.println("2D Array: " + facultyCourseoffered[index][col]);
+		        col++; 
+		     }
+        	
+        	index++;
+        }
+        System.out.println("Obtained Courses Taken");
+		
+		return facultyCourseoffered;
 	}
     public void closeCon() throws Exception
     {

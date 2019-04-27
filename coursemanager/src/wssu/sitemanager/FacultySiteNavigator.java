@@ -33,7 +33,7 @@ public class FacultySiteNavigator extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		 action =request.getParameter("action");
 		 System.out.println("Get request action parameter: " + action);
 		 fnav=request.getParameter("fnav");
@@ -50,10 +50,14 @@ public class FacultySiteNavigator extends HttpServlet {
 				request.getRequestDispatcher("Faculty_home.jsp").forward(request, response);
 				break;
 			case "addclass":
-				Object[] fc = (Object[])courses.toArray();
-				Object[] fsem = (Object[])semester.toArray();
-				request.setAttribute("faculty_courses", fc);
-				request.setAttribute("faculty_semester", fsem);
+				try {
+//				Object[] fc = (Object[])courses.toArray();
+//				Object[] fsem = (Object[])semester.toArray();
+				Connect con=new Connect();
+				
+//				request.setAttribute("faculty_classes",  con.getAllCourses());
+//				request.setAttribute("coursesOffered", con.getAllOffers());
+				}catch(Exception e) {}
 				request.getRequestDispatcher("facultyAddCourse.jsp").forward(request, response);
 				break;
 				
@@ -76,26 +80,42 @@ public class FacultySiteNavigator extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action=request.getParameter("action");
 		System.out.println("post request action " + action);
-		String button=request.getParameter("remove");
-		 System.out.println("post request button parameter: " + button);
+//		String button=request.getParameter("remove");
+//		 System.out.println("post request button parameter: " + button);
 		switch(action) {
-			case "addcourse":
-				addCourses(request, response);
+			case "lookupcourses":
+				getAssignFacultyCourses(request, response);
 				break;
 		}
 	}
 	
+	@SuppressWarnings("static-access")
+	private void getAssignFacultyCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		try {
+			String semester=request.getParameter("semester");
+			int year=Integer.parseInt(request.getParameter("year"));
+			Connect con=new Connect();
+			request.setAttribute("offered", con.assignedFacultyCourses(semester, year));
+//			request.setAttribute("enrollClasses", Connect.getClassID(Connect.getStudentInfo().getPK()));
+			con.closeCon();
+//			request.setAttribute("name", "gettingCourses");
+			request.getRequestDispatcher("facultyAddCourse.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@SuppressWarnings("unused")
-	private void getAllCoursesTaken(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void getAllCoursesAdded(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
 			String course=request.getParameter("course");
 			String semester=request.getParameter("semester");
 			int year=Integer.parseInt(request.getParameter("year"));
 			Connect con=new Connect();
-			request.setAttribute("allCourses", con.getAllCourses());
-			request.setAttribute("taken", con.courseTakenInSpecificYear(course, semester, year));
+			request.setAttribute("OfferedCourses", con.getAllOffers());
+			request.setAttribute("CoursesTaken", con.courseTakenInSpecificYear(course, semester, year));
 			con.closeCon();
-			request.getRequestDispatcher("studenthome.jsp").forward(request, response);
+//			request.getRequestDispatcher("facultyAddClass.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

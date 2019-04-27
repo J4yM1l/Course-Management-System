@@ -18,7 +18,7 @@ import wssu.javaclasses.*;
 @WebServlet("/SiteNavigator")
 public class SiteNavigator extends HttpServlet {
 	static Student student;
-	static Faculty faculty;
+	 static Faculty faculty;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -143,7 +143,7 @@ public class SiteNavigator extends HttpServlet {
 			    newSession.setMaxInactiveInterval(300);
 			    newSession.setAttribute("username", username);
 			    
-			    Cookie cookie = new Cookie("username", username);;
+			    Cookie cookie = new Cookie("username", username);
 				response.addCookie(cookie);
 
 				response.sendRedirect(request.getContextPath()+"/StudentSiteNavigator?action="+username+"&nav=dashboard");
@@ -172,9 +172,9 @@ public class SiteNavigator extends HttpServlet {
 				HttpSession newSession = request.getSession(true);
 			    newSession.setMaxInactiveInterval(300);
 			    newSession.setAttribute("username", username);
-			    Cookie cookie = new Cookie("username", username);;
+			    Cookie cookie = new Cookie("username", username);
 				response.addCookie(cookie);
-				student=connection.getStudentInfo();
+//				student=connection.getStudentInfo();
 				request.setAttribute("faculty", faculty);
 				if(auth==null)
 				response.sendRedirect(request.getContextPath()+"/FacultySiteNavigator?action="+username+"&fnav=dashboard");

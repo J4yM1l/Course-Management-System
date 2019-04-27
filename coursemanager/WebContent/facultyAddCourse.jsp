@@ -79,14 +79,14 @@
 		 
 		  if (facultyData != null){
 		  for(int i = 0; i<facultyData.length; i++){
-		  	if(facultyData[i] == null){
+		  	if(facultyData[i][0] == null){
 		  		break;
 		  	}
 		  
 		  %>
 		    <tr>
 		      <th scope="row"><%=facultyData[i][0] %></th>
-		      <td>facultyData[i][1]</td>
+		      <td><%=facultyData[i][1] %></td>
 		      <td><%=request.getParameter("semester") %></td>
 		  
 			<td><button type="button"  onclick="<%=(FacultySiteNavigator.clearCourses())%>" class="btn btn-primary">Remove</button></td>

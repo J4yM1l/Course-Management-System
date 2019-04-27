@@ -123,7 +123,7 @@ public class Student {
 		
 	}
 	public static int getPK() {
-		System.out.println("Primary Key is: "+pk);
+		System.out.println("Primary Key is: " + pk);
 		return pk;
 	}
 	

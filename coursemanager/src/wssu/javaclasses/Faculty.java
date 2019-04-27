@@ -49,7 +49,7 @@ public class Faculty {
 		}
 		if(tusername==null || tpassword==null)
 			return false;
-		System.out.println(tusername+" "+tpassword +"  "+rs.next());
+		System.out.println(tusername+" "+ tpassword +" "+rs.next());
         if(tusername.equals(username) && tpassword.equals(password)) {
         	return true;}
 	   return false;
@@ -67,7 +67,12 @@ public class Faculty {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-	
-
+////	
+//
 }
+//	Faculty faculty = null;
+//	 public String getFacultyInfo() {
+//		 String facultyInfo = username + " " + password;
+//	    	return facultyInfo;
+//	    }
 }
