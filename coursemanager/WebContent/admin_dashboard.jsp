@@ -95,7 +95,7 @@
 		    
 		     <div class="col-lg" style="margin: 6px">
 				<div class="card">
-				  <h5 class="card-header">All Courses</h5>
+				  <h5 class="card-header">All Courses Offer</h5>
 				  <div class="card-body">
 				 <!-- Begin -->
 				  <!-- end -->
@@ -121,7 +121,7 @@
 					      <td>#<%=result[i][0] %></td>
 					      <td><%=token.nextToken() %></td>
 					      <td><%=token.nextToken() %></td>
-					      <td><button type="button" class="btn btn-success btn float-right">remove</button></td>
+					      <td><a href="<%=request.getContextPath()%>/AdminSiteNavigator?nav=drop&oid=<%=result[i][0]%>"><button type="button" class="btn btn-danger btn float-left">remove</button></a></td>
 					    </tr>
 				    <%}
 				  		}%>

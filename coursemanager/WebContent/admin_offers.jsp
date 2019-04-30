@@ -95,7 +95,7 @@
 		    
 		     <div class="col-lg" style="margin: 6px">
 				<div class="card">
-				  <h5 class="card-header">Offer A Class</h5>
+				  <h5 class="card-header">Offer A Course</h5>
 				  <div class="card-body">
 				 <form action="<%=request.getContextPath()%>/AdminSiteNavigator?action=offer" method="post">
 					  <select class="form-control form-control-sm" name="course">
@@ -130,7 +130,7 @@
 					<br/>
 					<div class="form-group row">
 					    <div class="col-md-10">
-					      <button type="submit" class="btn btn-primary text-center col-md-4" style="margin: auto;">Submit</button>
+					      <button type="submit" class="btn btn-primary text-center col-md-4" style="margin: auto;">Offer</button>
 					    </div>
 					 </div>	
 				</form>

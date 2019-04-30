@@ -5,6 +5,19 @@ AS
 delete from Enrolled
 Where sid=@sid and oid=@oid;
 
+Create procedure dropOffers
+@oid int
+AS
+while((select count(oid) from Enrolled where oid=@oid)>=1)
+begin
+delete from Enrolled
+Where oid=@oid;
+end
+begin 
+delete from offered 
+where oid=@oid;
+end
+
 
 Create procedure getUserInfor
 @id int,

@@ -448,6 +448,12 @@ public class Connect
 		
 		return facultyCourseoffered;
 	}
+	
+	public static void dropOffers(int oid) throws SQLException {
+       	CallableStatement cstmt=connection.prepareCall("{call dropOffers("+oid+")}");
+       	cstmt.executeUpdate();
+       	System.out.println("------\nClass: Connect\nMethod: dropOffers\nDropped offers with id "+oid +" from the Offer and enrolled tables\n------");
+	}
 	/*
 	 * closes the connection
 	 * @return void

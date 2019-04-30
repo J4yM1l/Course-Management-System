@@ -87,7 +87,7 @@
 				    		break;}}
 				    if(found==false){
 	    			%>
-	    			<button type="submit" class="btn btn-primary float-right" onclick="">ENROLL</button>
+	    			<button type="submit" class="btn btn-success float-right" onclick="">ENROLL</button>
 	    			<%}else{
 	    			%>
 	    			<label class="float-right text-danger" >You are already Enrolled</label>
