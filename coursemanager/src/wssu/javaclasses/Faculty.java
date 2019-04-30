@@ -22,6 +22,8 @@ public class Faculty {
     private ResultSet rs = null;
     @SuppressWarnings("unused")
     private String course;
+    private String sem;
+    private int yr;
     
 	public Faculty(Connection connect, String username, String passord) throws SQLException {
 		this.username=username.toLowerCase().trim();
@@ -39,6 +41,20 @@ public class Faculty {
 		
 	}
 	
+	public Faculty(String str, int val) {
+		this.sem = str;
+		this.yr = val;
+		
+	}
+	
+	public String getSemester() {
+		return sem;
+	}
+	
+	public int getYear() {
+		return yr;
+	}
+	
 	public boolean validate() throws SQLException{
 		if(username.equals("") || password.equals("")) return false;
 		String tusername=null, tpassword=null;
@@ -53,6 +69,18 @@ public class Faculty {
         if(tusername.equals(username) && tpassword.equals(password)) {
         	return true;}
 	   return false;
+	}
+	
+	public String  facultyCourseOfferedDetail(String[][] facultyCourseoffered) {
+		String semester = null;
+		String year;
+		for(int i = 0; i<facultyCourseoffered.length; i++) {
+			semester = facultyCourseoffered[i][0];
+			year = facultyCourseoffered[i][1];
+			System.out.println("Semester: " + semester);
+			System.out.println("Year: " + year);
+		}
+			return semester;
 	}
 	
 	public void removeCourses(ArrayList<String> c, ArrayList<String> s)throws ServletException, IOException {
@@ -75,4 +103,6 @@ public class Faculty {
 //		 String facultyInfo = username + " " + password;
 //	    	return facultyInfo;
 //	    }
+
+
 }

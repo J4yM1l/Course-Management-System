@@ -41,13 +41,23 @@
     </tr>
   </thead>
   <tbody>
+   <% String[][] facultyData=(String[][])request.getAttribute("offered");
+		 
+		  if (facultyData != null){
+		  for(int i = 0; i<facultyData.length; i++){
+		  	if(facultyData[i][0] == null){
+		  		break;
+		  	}
+		  
+		  %>
     <tr>
-      <th scope="row">1</th>
-      <td>CSC 3211</td>
-      <td>Fall Semester</td>
+      <th scope="row"><%=facultyData[i][0] %></th>
+      <td><%=facultyData[i][1] %></td>
+      <td><%=request.getParameter("semester") %></td>
       <td>20</td>
     </tr>
-    <tr>
+     <%}} %>
+<!--     <tr>
       <th scope="row">2</th>
       <td>CSC 3311</td>
       <td>Fall Semester</td>
@@ -58,7 +68,7 @@
       <td>CSC 2210</td>
       <td>Fall Semester</td>
       <td>22</td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>
   </div>

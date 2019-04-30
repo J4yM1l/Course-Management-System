@@ -429,25 +429,37 @@ public class Connect
 		stmt = connection.createStatement();
         rs = stmt.executeQuery(sql);
         String[][] facultyCourseoffered = null;
+        int tableRowSize = rs.getFetchSize();
         int index=0;
-        int col = 0;
-        while(rs.next()) {
-        	String data =String.valueOf(rs.getInt(1))+","+(rs.getString(2));//+"&"+ rs.getString(5)+" "+rs.getString(6)+" "+rs.getString(7)+"&"+ rs.getString(3)+ "&"+ rs.getString(4)+"&"+ String.valueOf(rs.getInt(8));
-        	StringTokenizer token = new StringTokenizer(data, ",");
-        	int sizeToken = token.countTokens();
-        	 facultyCourseoffered=new String[rs.getFetchSize()][sizeToken];
-        	 while (token.hasMoreTokens()) { 
-        		 facultyCourseoffered[index][col] = token.nextToken();
-		         System.out.println("2D Array: " + facultyCourseoffered[index][col]);
-		        col++; 
-		     }
+        facultyCourseoffered=new String[rs.getFetchSize()][4];
+        if(!rs.next()) {
+        	System.out.println("No records found");
+
+        }else {
+        	do {
+//        		String data =String.valueOf(rs.getInt(1))+","+(rs.getString(2));//+"&"+ rs.getString(5)+" "+rs.getString(6)+" "+rs.getString(7)+"&"+ rs.getString(3)+ "&"+ rs.getString(4)+"&"+ String.valueOf(rs.getInt(8));
+        		String location = String.valueOf(rs.getString(3)); //getting the building location
+        		String roomNumber = String.valueOf(rs.getString(4)); //getting the building room number
+        		String cID = String.valueOf(rs.getInt(1)); //getting the course ID
+        		String cName = String.valueOf(rs.getString(2)); //getting the course name
+        		 facultyCourseoffered[index][0]=String.valueOf(rs.getInt(1));
+        		 facultyCourseoffered[index][1]=String.valueOf(rs.getString(2));
+        		 facultyCourseoffered[index][2]=String.valueOf(rs.getString(3));
+        		 facultyCourseoffered[index][3]=String.valueOf(rs.getString(4));
+            	 System.out.println("Before Row " + index);
+            	
+            	 System.out.println("Data " + cID + " "+ cName + " "+location+" "+roomNumber);
+            	++index;
+//            	System.out.println("After Row " + index);
+        	}
+        		while(rs.next());
         	
-        	index++;
-        }
-        System.out.println("Obtained Courses Taken");
+        System.out.println("Courses Offered for Faculty retrieved ");
+        System.out.println("Obtained table row size " + tableRowSize);
 		
-		return facultyCourseoffered;
 	}
+        return facultyCourseoffered;
+}
 	/*
 	 * closes the connection
 	 * @return void
