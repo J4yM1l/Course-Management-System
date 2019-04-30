@@ -72,7 +72,7 @@
 			    <label><%=meet_at%></label><br/>
 			    <label class="card-title font-weight-bold"> Meeting Room: </label>
 			    <label>#<%=rm %></label><br/>    
-			    <a class="float-right" href="<%=request.getContextPath()%>/StudentSiteNavigator?nav=drop&oid=<%=oid%>"><button type="submit" class="btn btn-primary float-left">DROP</button></a>
+			    <a class="float-right" href="<%=request.getContextPath()%>/StudentSiteNavigator?nav=drop&oid=<%=oid%>"><button type="submit" class="btn btn-danger float-left">DROP</button></a>
 			  </div>
 			</div>
 	    </li>

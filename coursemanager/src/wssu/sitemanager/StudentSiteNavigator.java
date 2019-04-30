@@ -208,6 +208,7 @@ public class StudentSiteNavigator extends HttpServlet {
 		
 		request.setAttribute("ProfileInfor", Student.getInforArray());	
 	}
+	@SuppressWarnings("static-access")
 	private void updateUserInformation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception{
 		Connect con=new Connect();
 		String[] infor=new String[6];
@@ -225,6 +226,7 @@ public class StudentSiteNavigator extends HttpServlet {
 		con.closeCon();
 		response.sendRedirect(request.getContextPath()+"/StudentSiteNavigator?nav=profile&updated=true");
 		}
+	@SuppressWarnings("static-access")
 	private void updatePassword (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception{
 		String pwd1=request.getParameter("p1").trim();
 		String pwd2=request.getParameter("p2").trim();
@@ -232,6 +234,7 @@ public class StudentSiteNavigator extends HttpServlet {
 			Connect con =new Connect();
 			Connect.updatePassword(pwd1);
 			Connect.getStudentInfo().initInfor(Connect.connection);
+			con.closeCon();
 			response.sendRedirect(request.getContextPath()+"/StudentSiteNavigator?nav=profile&updatefailed=false");
 		}else
 		{

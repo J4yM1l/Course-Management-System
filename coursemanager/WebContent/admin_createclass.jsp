@@ -95,7 +95,7 @@
 		    
 		     <div class="col-lg" style="margin: 6px">
 				<div class="card">
-				  <h5 class="card-header">All Courses</h5>
+				  <h5 class="card-header">Create A Course</h5>
 				  <div class="card-body">
 				 <form action="<%=request.getContextPath()%>/AdminSiteNavigator?action=addclass" method="post">
 					  <div class="form-group">

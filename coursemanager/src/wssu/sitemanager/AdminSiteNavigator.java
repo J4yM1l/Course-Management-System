@@ -32,7 +32,6 @@ public class AdminSiteNavigator extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String action=request.getParameter("nav");
 		switch(action) {
 			case "dashboard":
@@ -41,7 +40,6 @@ public class AdminSiteNavigator extends HttpServlet {
 					offers=parseOfferArray();
 					request.setAttribute("activeOffers", offers);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				request.getRequestDispatcher("admin_dashboard.jsp").forward(request, response);
@@ -59,6 +57,10 @@ public class AdminSiteNavigator extends HttpServlet {
 				}catch(Exception e){
 					
 				}
+				break;
+			case "drop":
+				dropOffers(request, response);
+				response.sendRedirect(request.getContextPath()+"/AdminSiteNavigator?nav=dashboard");
 				break;
 		
 		}
@@ -184,5 +186,18 @@ public class AdminSiteNavigator extends HttpServlet {
 		everyClass=con.getAllCourses();
 		everyFaculty=con.getAllFaculty();
 		con.closeCon();
+	}
+	
+	private void dropOffers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		int oid=Integer.parseInt(request.getParameter("oid"));
+		try {
+			Connect con=new Connect();
+			Connect.dropOffers(oid);
+			con.closeCon();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
