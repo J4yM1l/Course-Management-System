@@ -1,7 +1,9 @@
+<%@page import="wssu.javaclasses.Faculty"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ page import=" wssu.sitemanager.*" %>
  <%@ page import="java.util.*" %> 
+ <%@ page import= " wssu.javaclasses.Faculty" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +20,7 @@
   <!-- Custom styles for this template -->
   <link href="f_sources/css/business-frontpage.css" rel="stylesheet">
     <script src="f_sources/js/dataManipulation.js"></script>
-    <% Object [] faculty_C = (Object [])request.getAttribute("faculty_courses"); 
-	  Object [] faculty_S= (Object [])request.getAttribute("faculty_semester");
-		
-		  
-    %>
+
 </head>
 <body>
   <!-- Page Content -->
@@ -71,6 +69,8 @@
 	       	<th scope="row">ID</th>
 	        <th scope="row">COURSE TITLE</th>
 	         <th scope="row">SEMESTER</th>
+	          <th scope="row">Location</th>
+	           <th scope="row">Room #</th>
 	      </tr>
 	    </thead>
 		  <tbody>
@@ -88,10 +88,13 @@
 		      <th scope="row"><%=facultyData[i][0] %></th>
 		      <td><%=facultyData[i][1] %></td>
 		      <td><%=request.getParameter("semester") %></td>
+		      <td><%=facultyData[i][2] %></td>
+		      <td><%=facultyData[i][3] %></td>
 		  
-			<td><button type="button"  onclick="<%=(FacultySiteNavigator.clearCourses())%>" class="btn btn-primary">Remove</button></td>
+<!-- 			<button type="button" class="btn btn-primary">Remove</button> -->
 		    </tr>  
 		   <%}} %>
+		   
 <!-- 		  </form> -->
 <!-- 		    <tr> -->
 <!-- 		      <th scope="row">2</th> -->

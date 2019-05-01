@@ -51,12 +51,10 @@ public class FacultySiteNavigator extends HttpServlet {
 				break;
 			case "addclass":
 				try {
-//				Object[] fc = (Object[])courses.toArray();
-//				Object[] fsem = (Object[])semester.toArray();
 				Connect con=new Connect();
 				
 //				request.setAttribute("faculty_classes",  con.getAllCourses());
-//				request.setAttribute("coursesOffered", con.getAllOffers());
+//				request.setAttribute("offered", con.assignedFacultyCourses(semester, year));
 				}catch(Exception e) {}
 				request.getRequestDispatcher("facultyAddCourse.jsp").forward(request, response);
 				break;
@@ -85,6 +83,7 @@ public class FacultySiteNavigator extends HttpServlet {
 		switch(action) {
 			case "lookupcourses":
 				getAssignFacultyCourses(request, response);
+				 
 				break;
 		}
 	}
@@ -122,42 +121,42 @@ public class FacultySiteNavigator extends HttpServlet {
 		
 	}
 	
-	static ArrayList<String> courses = new ArrayList<String>();
-	static ArrayList<String> semester = new ArrayList<String>();
-	public void addCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			String fCourse = request.getParameter("courses");
-			String fSemester = request.getParameter("semester");
-			System.out.println("Faculty Course: " + fCourse);
-			System.out.println("Semester: " + fSemester);
-			courses.add(fCourse);
-			Object[] arr = (Object[])courses.toArray();
-			semester.add(fSemester);
-			Object[] arr1 = (Object[])semester.toArray();
-			request.setAttribute("faculty_courses", arr);
-			request.setAttribute("faculty_semester", arr1);
-			request.getRequestDispatcher("facultyAddCourse.jsp").forward(request, response);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
+//	static ArrayList<String> courses = new ArrayList<String>();
+//	static ArrayList<String> semester = new ArrayList<String>();
+//	public void addCourses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		try {
+//			String fCourse = request.getParameter("courses");
+//			String fSemester = request.getParameter("semester");
+//			System.out.println("Faculty Course: " + fCourse);
+//			System.out.println("Semester: " + fSemester);
+//			courses.add(fCourse);
+//			Object[] arr = (Object[])courses.toArray();
+//			semester.add(fSemester);
+//			Object[] arr1 = (Object[])semester.toArray();
+//			request.setAttribute("faculty_courses", arr);
+//			request.setAttribute("faculty_semester", arr1);
+//			request.getRequestDispatcher("facultyAddCourse.jsp").forward(request, response);
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
 
-	public static boolean clearCourses()throws ServletException, IOException {
-		try {
-//			String rem = request.getParameter("courses");
-//			 System.out.println("value: " + rem);
-		 System.out.println("SiteNav Performing clear operation !!");
-		 Faculty fac = new Faculty();
-		 fac.removeCourses(courses,semester);
-		 System.out.println("operation cleared !!");
-		 
-//	      retval = arrlist.size();
-//	      System.out.println("Now, list consists of "+ retval +" elements");
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return true;
-
-}
+//	public static boolean clearCourses()throws ServletException, IOException {
+//		try {
+////			String rem = request.getParameter("courses");
+////			 System.out.println("value: " + rem);
+//		 System.out.println("SiteNav Performing clear operation !!");
+//		 Faculty fac = new Faculty();
+//		 fac.removeCourses(courses,semester);
+//		 System.out.println("operation cleared !!");
+//		 
+////	      retval = arrlist.size();
+////	      System.out.println("Now, list consists of "+ retval +" elements");
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return true;
+//
+//}
 }
