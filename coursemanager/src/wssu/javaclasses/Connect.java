@@ -26,6 +26,7 @@ public class Connect
      @SuppressWarnings("unused")
 
 	private int s_pk;		//The primary key for current user
+    private int f_pk;
 
     /**
      * Constructor for objects of class Connect
@@ -461,7 +462,18 @@ public class Connect
         return facultyCourseoffered;
 }
 
-	
+	public static String[] getAllFacultyAssignClasses() throws SQLException {
+		CallableStatement cstmt=connection.prepareCall("{call getFacultyAssignedClasses("+Faculty.getPk()+")}");
+		stmt = connection.createStatement();
+        rs = cstmt.executeQuery();
+        String[] facultyCourseoffered = new String[rs.getFetchSize()];
+        int index=0;
+        while(rs.next()) {
+        	facultyCourseoffered[index]=rs.getInt(1)+"&"+rs.getInt(2)+"&"+ rs.getString(3)+"&"+rs.getString(4)+"&"+ rs.getInt(5);
+        	index++;
+        }
+        return facultyCourseoffered;
+	}
 	public static void dropOffers(int oid) throws SQLException {
        	CallableStatement cstmt=connection.prepareCall("{call dropOffers("+oid+")}");
        	cstmt.executeUpdate();

@@ -44,7 +44,8 @@ public class FacultySiteNavigator extends HttpServlet {
 				try {
 				Connect con=new Connect();
 				faculty=(Faculty)request.getAttribute("faculty");
-				request.setAttribute("allCourses", con.getAllCourses());
+				request.setAttribute("facultyAssigncourses", Connect.getAllFacultyAssignClasses());
+				System.out.println("Faculty key: "+Faculty.getPk());
 				con.closeCon();
 				}catch(Exception e) {}
 				request.getRequestDispatcher("Faculty_home.jsp").forward(request, response);

@@ -13,17 +13,18 @@ public class Faculty {
 	@SuppressWarnings("unused")
 	private String fName, mName, lName;
 	@SuppressWarnings("unused")
-	private String major, byear, level, department;
-	private String username, password;
+	private static String major, byear, level, department;
+	private static String username, password;
 	@SuppressWarnings("unused")
-	private int pk;
-	private Connection connection=null;
-    private Statement stmt = null;
-    private ResultSet rs = null;
+	private static int pk;
+	private static Connection connection=null;
+    private static Statement stmt = null;
+    private static ResultSet rs = null;
     @SuppressWarnings("unused")
     private String course;
     private String sem;
     private int yr;
+
     
 	public Faculty(Connection connect, String username, String passord) throws SQLException {
 		this.username=username.toLowerCase().trim();
@@ -55,11 +56,12 @@ public class Faculty {
 		return yr;
 	}
 	
-	public boolean validate() throws SQLException{
+	public static boolean validate() throws SQLException{
 		if(username.equals("") || password.equals("")) return false;
 		String tusername=null, tpassword=null;
 		while(rs.next())
 		{
+			pk=rs.getInt("fid");
 			tusername=rs.getString("username");
 			tpassword=rs.getString("password");
 		}
@@ -69,6 +71,26 @@ public class Faculty {
         if(tusername.equals(username) && tpassword.equals(password)) {
         	return true;}
 	   return false;
+	}
+	public static void setPK(int pkey) {
+		pk=pkey;
+	}
+	public static int getPk() {
+		return pk;
+	}
+	//Not used in program: suppose to display detail of student taking specific course
+	public static String[] getStudentForThisoffer(int oid) throws Exception {
+		Connect con=new Connect();
+		String sql="select c.fanme, c.lname, c.level from enrolled e, course c where c.cid=e.cid and e.oid="+oid;
+		rs=stmt.executeQuery(sql);
+		String[] data=new String[rs.getFetchSize()];
+		int index=0;
+		while(rs.next()) {
+			data[index]=rs.getString(1)+"&"+rs.getString(2)+"&"+rs.getString(3)+"&"+
+			index++;
+		}
+		con.closeCon();
+		return data;
 	}
 	
 	public String  facultyCourseOfferedDetail(String[][] facultyCourseoffered) {
